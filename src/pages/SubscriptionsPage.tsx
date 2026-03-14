@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import { useEffect, useState } from "react";
 
 interface PersonalData {
@@ -74,7 +75,8 @@ export default function SubscriptionsPage() {
     );
   }
 
-  return (
+  return (<>
+    <Header />
     <div className="p-8 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Lista de Inscrições</h1>
 
@@ -119,5 +121,7 @@ export default function SubscriptionsPage() {
         </table>
       </div>
     </div>
+  </>
+
   );
 }

@@ -23,7 +23,7 @@ export default function Banner() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                     <div className="flex items-center gap-2 text-lg">
                         <p>🗓️</p>
-                        <span>06-10 de Fevereiro, 2026</span>
+                        <span>06-10 de Fevereiro, 2027</span>
                     </div>
                     <div className="hidden sm:block w-px h-6 bg-gray-400"></div>
                     <div className="flex items-center gap-2 text-lg">

@@ -1,21 +1,51 @@
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
+import { useAuth } from "@/contexts/Context";
+
 export default function Header() {
+
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  }
+
+
   return (
     <header className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
-          <img src=".\src\assets\logo.png" alt="Logo" className="h-15 w-auto " />
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-15 w-auto cursor-pointer"
+            onClick={() => navigate('/')}
+          />
           <span className="ml-2 text-lg font-bold text-gray-800">
           </span>
         </div>
         <div className="flex items-center gap-3">
           <button
             className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-            Inscrever-se
+            Faça sua inscrição
           </button>
-          <button
-            className="px-4 py-2 text-sm font-medium text-red-600 border border-red-500 rounded-lg hover:bg-red-50 transition">
-            Sair
-          </button>
+          {!user ? (
+            <button
+              className="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-500 rounded-lg hover:bg-blue-50 transition"
+              onClick={() => navigate('/auth/login')}
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              className="px-4 py-2 text-sm font-medium text-red-600 border border-red-500 rounded-lg hover:bg-red-50 transition"
+              onClick={handleLogout}
+            >
+              Sair
+            </button>
+          )}
         </div>
       </div>
     </header>
