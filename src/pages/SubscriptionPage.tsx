@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/contexts/Context";
 
 type PersonalData = {
     name: string;
@@ -7,7 +8,11 @@ type PersonalData = {
     city: string;
     centroEspirita: string;
     badgeName: string;
-    emergencyContact: string;
+    emergencyContact?: string;
+    minorsGuardianName?: string;
+    address: string;
+    imageConsent: boolean;
+    regulationsConsent: boolean;
 };
 
 type HealthData = {
@@ -17,6 +22,16 @@ type HealthData = {
 };
 
 export default function SubscriptionPage() {
+
+
+
+    const { user, isLoading } = useAuth();
+
+    if (isLoading) {
+        return <p>Carregando...</p>;
+    }
+
+
     const [personalData, setPersonalData] = useState<PersonalData>({
         name: "",
         age: 0,
@@ -25,6 +40,10 @@ export default function SubscriptionPage() {
         centroEspirita: "",
         badgeName: "",
         emergencyContact: "",
+        minorsGuardianName: "",
+        address: "",
+        imageConsent: false,
+        regulationsConsent: false,
     });
 
     const [healthData, setHealthData] = useState<HealthData>({
@@ -33,6 +52,7 @@ export default function SubscriptionPage() {
         cuidadosEspeciais: "",
     });
 
+    
     const handlePersonalChange = (field: keyof PersonalData, value: string | number) => {
         setPersonalData((prev) => ({
             ...prev,
@@ -47,13 +67,41 @@ export default function SubscriptionPage() {
         }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        if (!user?.id) {
+            alert("Usuário não autenticado");
+            return;
+        }
+
         const body = {
+            userId: user?.id,
             personalData,
             healthData,
         };
 
-        console.log(body);
+        try {
+            const response = await fetch("http://localhost:3333/subscription/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+
+            const data = await response.json();
+            console.log('Response data:', data);
+
+            if (!response.ok) {
+                throw new Error(data.message || "Erro ao salvar dados");
+            }
+
+            console.log("Sucesso:", data);
+            alert("Cadastro realizado com sucesso!");
+        } catch (error: any) {
+            console.error("Erro:", error);
+            console.error("Erro detalhado:", error.message);
+            alert(error.message);
+        }
     };
 
     return (
@@ -103,6 +151,15 @@ export default function SubscriptionPage() {
                         className="w-full border rounded-lg p-2"
                         required
                     />
+                    <p>Seu Endereço *</p>
+                    <input
+                        type="text"
+                        placeholder="Endereço"
+                        value={personalData.address}
+                        onChange={(e) => handlePersonalChange("address", e.target.value)}
+                        className="w-full border rounded-lg p-2"
+                        required
+                    />
                     <p>Centro Espirita Frequentado *</p>
                     <input
                         type="text"
@@ -129,6 +186,14 @@ export default function SubscriptionPage() {
                         onChange={(e) => handlePersonalChange("emergencyContact", e.target.value)}
                         className="w-full border rounded-lg p-2"
                     />
+                    <p>Caso seja menor de idade</p>
+                    <input
+                        type="text"
+                        placeholder="Nome do Responsável"
+                        value={personalData.minorsGuardianName}
+                        onChange={(e) => handlePersonalChange("minorsGuardianName", e.target.value)}
+                        className="w-full border rounded-lg p-2"
+                    />
                 </div>
 
                 {/* Dados de Saúde */}
@@ -148,13 +213,42 @@ export default function SubscriptionPage() {
                         onChange={(e) => handleHealthChange("restricaoMedica", e.target.value)}
                         className="w-full border rounded-lg p-2"
                     />
-                    <p>Possui algum cuidado especial que devemos saber?</p> 
+                    <p>Possui algum cuidado especial que devemos saber?</p>
                     <textarea
                         placeholder="Cuidados Especiais"
                         value={healthData.cuidadosEspeciais}
                         onChange={(e) => handleHealthChange("cuidadosEspeciais", e.target.value)}
                         className="w-full border rounded-lg p-2"
                     />
+                </div>
+                <div className="space-y-3">
+                    <label className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            checked={personalData.imageConsent}
+                            onChange={(e) =>
+                                setPersonalData((prev) => ({
+                                    ...prev,
+                                    imageConsent: e.target.checked,
+                                }))
+                            }
+                        />
+                        Autorizo o uso da minha imagem
+                    </label>
+
+                    <label className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            checked={personalData.regulationsConsent}
+                            onChange={(e) =>
+                                setPersonalData((prev) => ({
+                                    ...prev,
+                                    regulationsConsent: e.target.checked,
+                                }))
+                            }
+                        />
+                        Declaro que li e aceito o regulamento
+                    </label>
                 </div>
 
                 <button
