@@ -1,6 +1,8 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import { useAuth } from "@/contexts/Context";
 import Header from "@/components/Header";
+import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 type PersonalData = {
     name: string;
@@ -25,6 +27,7 @@ type HealthData = {
 export default function SubscriptionPage() {
 
 
+    const navigate = useNavigate();
 
     const { user, isLoading } = useAuth();
 
@@ -93,15 +96,15 @@ export default function SubscriptionPage() {
             console.log('Response data:', data);
 
             if (!response.ok) {
-                throw new Error(data.message || "Erro ao salvar dados");
+                throw new Error(data.message || "Preencha todos os campos obrigatórios.");
             }
 
-            console.log("Sucesso:", data);
-            alert("Cadastro realizado com sucesso!");
+            
+            toast.success("Inscrição realizada com sucesso!");
+            navigate("/");
         } catch (error: any) {
-            console.error("Erro:", error);
-            console.error("Erro detalhado:", error.message);
-            alert(error.message);
+            
+            toast.error(error.message);
         }
     };
 
@@ -115,7 +118,7 @@ export default function SubscriptionPage() {
                         Cadastro de Participante
                     </h1>
 
-                    {/* Dados Pessoais */}
+                    {/* Dados Pessoais }
                     <div className="space-y-4">
                         <h2 className="text-lg font-medium text-gray-700">Dados Pessoais</h2>
                         <p>Seu Nome *</p>
@@ -199,7 +202,7 @@ export default function SubscriptionPage() {
                         />
                     </div>
 
-                    {/* Dados de Saúde */}
+                    {/* Dados de Saúde }
                     <div className="space-y-4">
                         <h2 className="text-lg font-medium text-gray-700">Dados de Saúde</h2>
                         <p>Possui alguma restrição alimentar?</p>
@@ -236,7 +239,7 @@ export default function SubscriptionPage() {
                                     }))
                                 }
                             />
-                            Autorizo o uso da minha imagem
+                            Autorizo o uso da minha imagem *
                         </label>
 
                         <label className="flex items-center gap-2">
@@ -250,7 +253,7 @@ export default function SubscriptionPage() {
                                     }))
                                 }
                             />
-                            Declaro que li e aceito o regulamento
+                            Declaro que li e aceito o regulamento *
                         </label>
                     </div>
 
@@ -264,4 +267,4 @@ export default function SubscriptionPage() {
             </div>
         </>
     );
-}
+}*/

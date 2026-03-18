@@ -6,7 +6,8 @@ import { AuthProvider } from "./contexts/Context"
 import Login from "./pages/Auth/Login"
 import Register from "./pages/Auth/Register"
 import { Toaster } from "sonner"
-import SubscriptionPage from "./pages/SubscriptionPage"
+import SubscriptionPage from "./pages/Subscription/SubscriptionPage"
+
 
 function App() {
   return (

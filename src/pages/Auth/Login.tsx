@@ -23,6 +23,7 @@ export default function Login() {
       await login(email, password);
       toast.success("Login realizado com sucesso!");
       navigate("/");
+      
     } catch (error) {
       toast.error("Credenciais inválidas. Tente novamente.");
     } finally {
