@@ -1,6 +1,11 @@
-import { Check } from "lucide-react";
+import { TriangleAlert } from "lucide-react";
+import { useAuth } from "@/contexts/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function CtaSection() {
+
+  const navigate = useNavigate()
+  const {user} = useAuth()
   const warnings = [
     "As incrições são sujeitas a aprovação da coordenação",
     "A coordenação não realiza cobrança do valor da inscrição",
@@ -35,8 +40,8 @@ export default function CtaSection() {
               <ul className="space-y-3">
                 {warnings.map((warning, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center mt-0.5">
-                      <Check className="w-4 h-4 text-green-900" />
+                    <div className="flex-shrink-0 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-0.5">
+                      <TriangleAlert className="w-4 h-4 text-yellow-900" />
                     </div>
                     <span className="text-lg">{warning}</span>
                   </li>
@@ -44,17 +49,24 @@ export default function CtaSection() {
               </ul>
             </div>
           </div>
-          <button className=" cursor-pointer px-20 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-700 transition">
+          <button className=" cursor-pointer px-20 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-700 hover:text-white transition "
+            onClick={() => navigate(user ? '/subscription' : '/auth/login')}>
             Inscreva-se
           </button>
         </div>
 
         <div className="text-center">
           <p className="text-lg text-blue-100 mb-4">
-            Acesse o regulamento completo e tire suas dúvidas sobre o processo de inscrição. Para mais informações, entre em contato conosco:
+            Acesse o <a 
+            href="https://drive.google.com/file/d/17nxvRTpklBFdhWaLdsEOYKK_5svuf0l_/view?usp=sharing" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-white tex-bold underline">
+                regulamento
+            </a> completo e tire suas dúvidas sobre o processo de inscrição. Para mais informações, entre em contato conosco:
           </p>
           <a href="mailto:contato@techsummit.com" className="text-xl font-semibold hover:underline">
-            contato coordenação
+            coezmuc123@gmail.com
           </a>
         </div>
       </div>

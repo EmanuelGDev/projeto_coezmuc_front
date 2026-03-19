@@ -8,9 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const passwordRef = useRef<HTMLInputElement>(null);
-
   const { login } = useAuth();
   const navigate = useNavigate();
 

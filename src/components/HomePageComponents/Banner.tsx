@@ -1,4 +1,12 @@
+import { useAuth } from "@/contexts/Context";
+import { useNavigate } from "react-router-dom";
+
 export default function Banner() {
+
+    const navigate = useNavigate()
+    const {user} = useAuth()
+    
+    ;
     return (
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
             {/* Background Image */}
@@ -33,7 +41,9 @@ export default function Banner() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className=" cursor-pointer px-20 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition">
+                    <button 
+                        className=" cursor-pointer px-20 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition" 
+                        onClick={() => navigate(user ? '/subscription' : '/auth/login')}>
                         Inscreva-se
                     </button>
                 </div>
@@ -45,6 +55,6 @@ export default function Banner() {
                     <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
                 </div>
             </div>
-        </section>
+        </section> 
     );
 }

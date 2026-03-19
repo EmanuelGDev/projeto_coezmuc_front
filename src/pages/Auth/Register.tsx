@@ -1,32 +1,47 @@
-import { useAuth } from "@/contexts/Context";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Register() {
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false);
-    const { login } = useAuth();
     const navigate = useNavigate();
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
         try {
-            console.log("Entrou no handleSubmit");
-            const response = await login(email, password);
-            toast.success('Login realizado com sucesso!');
-            navigate('/');
+            const response = await fetch("http://localhost:3333/user/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, email, password, confirmPassword }),
+            });
+            console.log("Resposta do servidor:", response);
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "Erro ao criar conta. Tente novamente.");
+            }
+            toast.success("Registro realizado com sucesso!");
+            navigate("/auth/login");
         } catch (error) {
-            console.error("Erro ao processar login:", error);
-
-            toast.error('Erro ao processar. Tente novamente.');
+            toast.error(error instanceof Error ? error.message : "Erro ao criar conta. Tente novamente.");
         } finally {
             setIsLoading(false);
         }
     };
+
+      const handleEmailKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      passwordRef.current?.focus();
+    }
+  };
 
 
     return (
@@ -52,35 +67,92 @@ export default function Register() {
 
 
                 <div className="flex flex-col gap-4">
-                    <h2 className="text-2xl font-bold text-center">Criar Conta</h2>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        
+                        <h2 className="text-2xl font-bold text-center">Criar Conta</h2>
 
-                    <input
-                        type="text"
-                        placeholder="Nome"
-                        className="border border-blue-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
+                        <input
+                            id="username"
+                            type="text"
+                            placeholder="Nome de Usuário"
+                            value={username}
+                            autoFocus
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="border border-blue-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            required
+                        />
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            autoFocus
+                            onChange={(e) => setEmail(e.target.value)}
+                            onKeyDown={handleEmailKeyDown}
+                            className="border border-blue-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            required
+                        />
 
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        className="border border-blue-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
+                        {/* Campo senha com mostrar/ocultar */}
+                        <div className="relative">
+                            <input
+                                ref={passwordRef}
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Senha"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="border border-blue-700 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
 
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        className="border border-blue-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirmar Senha"
-                        className="border border-blue-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                    <button className="bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-                        Registrar
-                    </button>
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer"
+                            >
+                                {showPassword ? "Ocultar Senha" : "Mostrar Senha"}
+                            </button>
+                        </div>
+
+                        <div className="relative">
+                            <input
+                                ref={passwordRef}
+                                id="confirmPassword"
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Confirmar Senha"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                className="border border-blue-700 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer"
+                            >
+                                {showPassword ? "Ocultar Senha" : "Mostrar Senha"}
+                            </button>
+                        </div>
+
+
+
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
+                        >
+                            {isLoading && (
+                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            )}
+
+                            {isLoading ? "Entrando..." : "Login"}
+                        </button>
+                    </form>
+
+
                 </div>
-
             </div>
         </div>
     );
