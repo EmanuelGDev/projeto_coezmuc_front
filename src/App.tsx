@@ -1,12 +1,12 @@
 
-import { HomePage } from "./pages/HomePage"
-import SubscriptionsPage from "./pages/SubscriptionsPage"
+import SubscriptionsPage from "./pages/Admin/SubscriptionsPage"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./contexts/Context"
 import Login from "./pages/Auth/Login"
 import Register from "./pages/Auth/Register"
 import { Toaster } from "sonner"
 import SubscriptionPage from "./pages/Subscription/SubscriptionPage"
+import { HomePage } from "./pages/Home/HomePage"
 
 
 function App() {
