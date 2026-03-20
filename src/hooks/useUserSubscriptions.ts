@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { Subscription, UserSubscriptionsResponse } from 'types/subscription'
-import axios from 'axios'
-
+import { useAuth } from '@/contexts/Context'
 
 export function useUserSubscriptions(userId: string) {
   const [data, setData] = useState<Subscription[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
+  const { user } = useAuth()
 
   useEffect(() => {
     if (!userId) return
@@ -14,11 +14,18 @@ export function useUserSubscriptions(userId: string) {
     setLoading(true)
     setError(null)
 
-    axios
-      .get<UserSubscriptionsResponse>(
-        `http://127.0.0.1:3333/subscription/userSubscriptions/${userId}`
-      )
-      .then((res) => setData(res.data.data))
+    fetch(`http://127.0.0.1:3333/subscription/userSubscriptions/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user?.token}`
+      }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Erro ao buscar inscrições')
+        return res.json()
+      })
+      .then((json: UserSubscriptionsResponse) => setData(json.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false))
   }, [userId])

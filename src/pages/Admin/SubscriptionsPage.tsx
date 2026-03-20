@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
 
 interface PersonalData {
@@ -49,10 +50,13 @@ interface ApiResponse {
 export default function SubscriptionsPage() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
+  const {user} = useAuth()
 
   async function fetchSubscriptions() {
     try {
-      const response = await fetch("http://127.0.0.1:3333/subscription");
+      const response = await fetch("http://127.0.0.1:3333/subscription", {
+        headers:{"Authorization" : `Bearer ${user?.token}`}
+      });
       const result: ApiResponse = await response.json();
 
       setSubscriptions(result.data);

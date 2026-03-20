@@ -1,4 +1,5 @@
-import type { PersonalData } from "@/pages/Subscription/types";
+import type { PersonalData } from "types/types";
+
 
 
 type Props = {
