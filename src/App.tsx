@@ -7,7 +7,9 @@ import Register from "./pages/Auth/Register"
 import { Toaster } from "sonner"
 import SubscriptionPage from "./pages/Subscription/SubscriptionPage"
 import { HomePage } from "./pages/Home/HomePage"
-import { PrivateRoute } from "./contexts/PrivateRoute"
+import { PrivateTokenRoute } from "./contexts/PrivateTokenRoute"
+import {PrivateAdminRoute} from "./contexts/PrivateAdminRoute"
+
 
 
 function App() {
@@ -20,8 +22,8 @@ function App() {
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             
-            <Route path="/subscriptions" element={<PrivateRoute><SubscriptionsPage /></PrivateRoute>} />
-            <Route path="/subscription/*" element={<PrivateRoute><SubscriptionPage /></PrivateRoute>} />
+            <Route path="/subscriptions" element={<PrivateAdminRoute><PrivateTokenRoute><SubscriptionsPage /></PrivateTokenRoute></PrivateAdminRoute>} />
+            <Route path="/subscription/*" element={<PrivateTokenRoute><SubscriptionPage /></PrivateTokenRoute>} />
             <Route path="*" element={<h1>404 - Not Found</h1>} />
           </Routes>
         </AuthProvider>

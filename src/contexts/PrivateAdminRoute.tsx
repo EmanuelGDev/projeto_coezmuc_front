@@ -1,15 +1,15 @@
-import { Navigate } from "react-router-dom";
+
 import { useAuth } from "@/contexts/Context";
 
-export function PrivateRoute({ children }: any) {
+export function PrivateAdminRoute({ children }: any) {
 
     const {user, isLoading} = useAuth()
 
     if(isLoading){
       return <div>Carregando</div>
     }
-  if (!user?.token) {
-    return <Navigate to="/auth/login" replace />;
+  if (!user?.isAdmin) {
+    return <div>Acesso negado</div>;
   }
 
   return children;
