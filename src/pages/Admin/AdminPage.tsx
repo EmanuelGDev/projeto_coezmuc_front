@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
+import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
 
 interface PersonalData {
   name: string;
@@ -47,15 +48,17 @@ interface ApiResponse {
   data: Subscription[];
 }
 
-export default function SubscriptionsPage() {
+export default function AdminPage() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
-  const {user} = useAuth()
+  const { user } = useAuth()
+  const [subscription, setSubscription] = useState<Subscription | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   async function fetchSubscriptions() {
     try {
       const response = await fetch("http://127.0.0.1:3333/subscription", {
-        headers:{"Authorization" : `Bearer ${user?.token}`}
+        headers: { "Authorization": `Bearer ${user?.token}` }
       });
       const result: ApiResponse = await response.json();
 
@@ -79,6 +82,21 @@ export default function SubscriptionsPage() {
     );
   }
 
+  async function getSusbscription(id: string) {
+    try {
+      const response = await fetch(`http://127.0.0.1:3333/subscription/${id}`, {
+        headers: { Authorization: `Bearer ${user?.token}` }
+      });
+
+      const result = await response.json();
+
+      setSubscription(result.data);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("Erro ao buscar inscrição:", error);
+    }
+  }
+
   return (<>
     <Header />
     <div className="p-8 bg-gray-100 min-h-screen">
@@ -93,12 +111,11 @@ export default function SubscriptionsPage() {
               <th className="p-3">Cidade</th>
               <th className="p-3">Telefone</th>
               <th className="p-3">Centro Espírita</th>
-              <th className="p-3">Restrição Alimentar</th>
-              <th className="p-3">Restrição Médica</th>
               <th className="p-3">Pagamento</th>
-              <th className="p-3">Valor</th>
               <th className="p-3">Status</th>
               <th className="p-3">Criado em</th>
+              <th className="p-3">Status de Inscrição</th>
+              <th className="p-3">Mais informações</th>
             </tr>
           </thead>
 
@@ -110,8 +127,7 @@ export default function SubscriptionsPage() {
                 <td className="p-3">{sub.personalData.city}</td>
                 <td className="p-3">{sub.personalData.phoneNumber}</td>
                 <td className="p-3">{sub.personalData.centroEspirita}</td>
-                <td className="p-3">{sub.healthData.restricaoAlimentar}</td>
-                <td className="p-3">{sub.paymentData.paymentStatus}</td>
+
                 <td className="p-3">
                   R$ {sub.paymentData.paidValue} / {sub.paymentData.fullValue}
                 </td>
@@ -119,12 +135,26 @@ export default function SubscriptionsPage() {
                 <td className="p-3">
                   {new Date(sub.createdAt).toLocaleDateString("pt-BR")}
                 </td>
+                <td className="p-3">{sub.paymentData.paymentStatus}</td>
+                <td className="p-3">
+                  <button
+                    onClick={() => getSusbscription(sub._id)}
+                    className="cursor-pointer px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Mais
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
+
+    <SubscriptionModal
+      subscription={subscription}
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    />
   </>
 
   );
