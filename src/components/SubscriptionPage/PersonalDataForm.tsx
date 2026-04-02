@@ -1,6 +1,5 @@
 
-
-import type { PersonalData } from "types/types";
+import type { PersonalData } from "types/subscription";
 import { FormField } from "./FormField";
 
 type Props = {

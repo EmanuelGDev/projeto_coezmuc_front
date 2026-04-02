@@ -1,4 +1,5 @@
-import type { HealthData } from "types/types";
+
+import type { HealthData } from "types/subscription";
 import { FormField } from "./FormField";
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 const textareaClass = "w-full border rounded-lg p-2";
 
 const healthFields: {
-    field: keyof HealthData;
+    field: keyof HealthData; // HealthData só tem string keys, então aqui está ok
     label: string;
     placeholder: string;
 }[] = [
@@ -36,7 +37,7 @@ export function HealthDataForm({ data, onChange }: Props) {
             <h2 className="text-lg font-medium text-gray-700">Dados de Saúde</h2>
 
             {healthFields.map(({ field, label, placeholder }) => (
-                <FormField key={field} label={label}>
+                <FormField key={String(field)} label={label}> {/* 👈 String() resolve o symbol no key */}
                     <textarea
                         placeholder={placeholder}
                         value={data[field]}

@@ -1,23 +1,25 @@
-import type { PersonalData } from "types/types";
-
+import type { PersonalData } from "types/subscription";
 
 
 type Props = {
     imageConsent: boolean;
     regulationsConsent: boolean;
-    onChange: (field: keyof PersonalData, value: boolean) => void;
+    onChange: (field: keyof PersonalData, value: string | number | boolean) => void; // 👈
 };
 
 const consents: {
-    field: keyof PersonalData;
+    field: "imageConsent" | "regulationsConsent"; // 👈 tipo literal em vez de keyof
     label: string;
 }[] = [
-        { field: "imageConsent", label: "Autorizo o uso da minha imagem *" },
-        { field: "regulationsConsent", label: "Declaro que li e aceito o regulamento *" },
-    ];
+    { field: "imageConsent", label: "Autorizo o uso da minha imagem *" },
+    { field: "regulationsConsent", label: "Declaro que li e aceito o regulamento *" },
+];
 
 export function ConsentSection({ imageConsent, regulationsConsent, onChange }: Props) {
-    const values: Record<string, boolean> = { imageConsent, regulationsConsent };
+    const values: Record<"imageConsent" | "regulationsConsent", boolean> = { // 👈 tipo literal
+        imageConsent,
+        regulationsConsent
+    };
 
     return (
         <div className="space-y-3">

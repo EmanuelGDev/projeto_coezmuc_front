@@ -2,11 +2,11 @@ export interface PersonalData {
   name: string
   age: number
   phoneNumber: string
-  minorsGuardianName: string
   city: string
   centroEspirita: string
   badgeName: string
-  emergencyContact: string
+  emergencyContact?: string        
+  minorsGuardianName?: string      
   address: string
   imageConsent: boolean
   regulationsConsent: boolean

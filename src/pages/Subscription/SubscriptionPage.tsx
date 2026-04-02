@@ -1,11 +1,9 @@
 import { useAuth } from "@/contexts/Context";
 import Header from "@/components/Header";
 import { useSubscription } from "@/hooks/useSubscription";
-import type { PersonalData } from "../../../types/types";
 import { PersonalDataForm } from "@/components/SubscriptionPage/PersonalDataForm";
 import { HealthDataForm } from "@/components/SubscriptionPage/HealthDataForm";
 import { ConsentSection } from "@/components/SubscriptionPage/ConsentSection";
-
 
 export default function SubscriptionPage() {
     const { isLoading } = useAuth();
@@ -30,9 +28,7 @@ export default function SubscriptionPage() {
                     <ConsentSection
                         imageConsent={personalData.imageConsent}
                         regulationsConsent={personalData.regulationsConsent}
-                        onChange={(field, value) =>
-                            handlePersonalChange(field as keyof PersonalData, value)
-                        }
+                        onChange={handlePersonalChange} // 👈 direto, sem cast
                     />
 
                     <button

@@ -2,47 +2,9 @@ import Header from "@/components/Header";
 import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
 import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
+import type { Subscription } from "types/subscription";
 
-interface PersonalData {
-  name: string;
-  age: number;
-  phoneNumber: string;
-  city: string;
-  centroEspirita: string;
-  badgeName: string;
-  emergencyContact: string;
-}
 
-interface HealthData {
-  restricaoAlimentar: string;
-  restricaoMedica: string;
-  cuidadosEspeciais: string;
-}
-
-interface PaymentData {
-  fullValue: number;
-  paidValue: number;
-  paymentStatus: string;
-}
-
-interface Status {
-  subscriptionStatus: string;
-}
-
-interface User {
-  _id: string;
-  username: string;
-}
-
-interface Subscription {
-  _id: string;
-  personalData: PersonalData;
-  healthData: HealthData;
-  paymentData: PaymentData;
-  status: Status;
-  userId: User;
-  createdAt: string;
-}
 
 interface ApiResponse {
   data: Subscription[];
@@ -154,6 +116,11 @@ export default function AdminPage() {
       subscription={subscription}
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
+      onUpdated={(updated) =>
+        setSubscriptions((prev) =>
+          prev.map((s) => (s._id === updated._id ? updated : s))
+        )
+      }
     />
   </>
 

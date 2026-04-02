@@ -2,7 +2,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/contexts/Context";
-import type { HealthData, PersonalData } from "types/types";
+import type { HealthData, PersonalData } from "types/subscription";
+
+
 
 
 
