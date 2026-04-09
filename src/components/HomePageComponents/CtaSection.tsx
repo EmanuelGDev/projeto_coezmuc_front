@@ -42,11 +42,11 @@ export default function CtaSection() {
         </div>
 
         {/* Avisos */}
-        <div className="bg-[#FAF7F2]/5 border border-[#B07D4A]/30 rounded-2xl p-8 md:p-10 mb-8">
+        <div className="bg-[#FAF7F2]/5 border border-[#B07D4A]/30 rounded-2xl p-8 md:p-10 mb-8 ">
           <h3 className="font-serif text-xl text-[#D4A96A] mb-6 text-center">Lembre-se</h3>
-          <ul className="space-y-4 mb-8">
+          <ul className="space-y-4 mb-8 flex flex-col items-center">
             {warnings.map((warning, index) => (
-              <li key={index} className="flex items-start gap-4">
+              <li key={index} className="flex items-start gap-4 max-w-sm w-full">
                 <div className="flex-shrink-0 w-6 h-6 bg-[#B07D4A]/20 border border-[#B07D4A]/40 rounded-full flex items-center justify-center mt-0.5">
                   <TriangleAlert className="w-3 h-3 text-[#D4A96A]" />
                 </div>
