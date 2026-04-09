@@ -1,5 +1,4 @@
-
-import type { PersonalData } from "types/subscription";
+import type { PersonalData } from "../../../types/subscription";
 import { FormField } from "./FormField";
 
 type Props = {
@@ -7,7 +6,13 @@ type Props = {
     onChange: (field: keyof PersonalData, value: string | number) => void;
 };
 
-const inputClass = "w-full border rounded-lg p-2";
+const inputClass = `
+    w-full border border-[#E8DDD0] rounded-lg px-4 py-2.5
+    bg-[#FAF7F2] text-[#3D2C1E] text-sm font-sans
+    placeholder:text-[#C4B49A]
+    focus:outline-none focus:border-[#B07D4A] focus:bg-white
+    transition-colors duration-200
+`;
 
 const textFields: {
     field: keyof PersonalData;
@@ -16,24 +21,26 @@ const textFields: {
     placeholder: string;
     required?: boolean;
 }[] = [
-    { field: "name", label: "Seu Nome", type: "text", placeholder: "Nome completo", required: true },
-    { field: "age", label: "Sua Idade", type: "number", placeholder: "Idade", required: true },
-    { field: "phoneNumber", label: "Seu Telefone", type: "text", placeholder: "Telefone", required: true },
-    { field: "city", label: "Sua Cidade", type: "text", placeholder: "Cidade", required: true },
-    { field: "address", label: "Seu Endereço", type: "text", placeholder: "Endereço", required: true },
-    { field: "centroEspirita", label: "Centro Espírita Frequentado", type: "text", placeholder: "Centro Espírita", required: true },
-    { field: "badgeName", label: "Nome para Crachá", type: "text", placeholder: "Nome no Crachá", required: true },
-    { field: "emergencyContact", label: "Contato de Emergência", type: "text", placeholder: "Contato de Emergência" },
-    { field: "minorsGuardianName", label: "Caso seja menor de idade", type: "text", placeholder: "Nome do Responsável" },
+    { field: "name", label: "Nome Completo", type: "text", placeholder: "Como você se chama?", required: true },
+    { field: "age", label: "Idade", type: "number", placeholder: "Sua idade", required: true },
+    { field: "phoneNumber", label: "Telefone", type: "text", placeholder: "(00) 00000-0000", required: true },
+    { field: "city", label: "Cidade", type: "text", placeholder: "Sua cidade", required: true },
+    { field: "address", label: "Endereço", type: "text", placeholder: "Rua, número, bairro", required: true },
+    { field: "centroEspirita", label: "Centro Espírita Frequentado", type: "text", placeholder: "Nome do centro espírita", required: true },
+    { field: "badgeName", label: "Nome para Crachá", type: "text", placeholder: "Como quer ser chamado(a)?", required: true },
+    { field: "emergencyContact", label: "Contato de Emergência", type: "text", placeholder: "Nome e telefone" },
+    { field: "minorsGuardianName", label: "Responsável (menores de idade)", type: "text", placeholder: "Nome do responsável" },
 ];
 
 export function PersonalDataForm({ data, onChange }: Props) {
     return (
-        <div className="space-y-4">
-            <h2 className="text-lg font-medium text-gray-700">Dados Pessoais</h2>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {textFields.map(({ field, label, type, placeholder, required }) => (
-                <FormField key={field} label={label} required={required}>
+                <FormField
+                    key={field}
+                    label={label}
+                    required={required}
+                >
                     <input
                         type={type ?? "text"}
                         placeholder={placeholder}

@@ -1,5 +1,5 @@
 
-import type { HealthData } from "types/subscription";
+import type { HealthData } from "../../../types/subscription";
 import { FormField } from "./FormField";
 
 type Props = {
