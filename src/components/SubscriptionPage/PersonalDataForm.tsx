@@ -21,16 +21,16 @@ const textFields: {
     placeholder: string;
     required?: boolean;
 }[] = [
-    { field: "name", label: "Nome Completo", type: "text", placeholder: "Como você se chama?", required: true },
-    { field: "age", label: "Idade", type: "number", placeholder: "Sua idade", required: true },
-    { field: "phoneNumber", label: "Telefone", type: "text", placeholder: "(00) 00000-0000", required: true },
-    { field: "city", label: "Cidade", type: "text", placeholder: "Sua cidade", required: true },
-    { field: "address", label: "Endereço", type: "text", placeholder: "Rua, número, bairro", required: true },
-    { field: "centroEspirita", label: "Centro Espírita Frequentado", type: "text", placeholder: "Nome do centro espírita", required: true },
-    { field: "badgeName", label: "Nome para Crachá", type: "text", placeholder: "Como quer ser chamado(a)?", required: true },
-    { field: "emergencyContact", label: "Contato de Emergência", type: "text", placeholder: "Nome e telefone" },
-    { field: "minorsGuardianName", label: "Responsável (menores de idade)", type: "text", placeholder: "Nome do responsável" },
-];
+        { field: "name", label: "Nome Completo", type: "text", placeholder: "Como você se chama?", required: true },
+        { field: "age", label: "Idade", type: "number", placeholder: "Sua idade", required: true },
+        { field: "phoneNumber", label: "Telefone", type: "text", placeholder: "(00) 00000-0000", required: true },
+        { field: "city", label: "Cidade", type: "text", placeholder: "Sua cidade", required: true },
+        { field: "address", label: "Endereço", type: "text", placeholder: "Rua, número, bairro", required: true },
+        { field: "centroEspirita", label: "Centro Espírita Frequentado", type: "text", placeholder: "Nome do centro espírita", required: true },
+        { field: "badgeName", label: "Nome para Crachá", type: "text", placeholder: "Como quer ser chamado(a)?", required: true },
+        { field: "emergencyContact", label: "Contato de Emergência", type: "text", placeholder: "Nome e telefone" },
+        { field: "minorsGuardianName", label: "Responsável (menores de idade)", type: "text", placeholder: "Nome do responsável" },
+    ];
 
 export function PersonalDataForm({ data, onChange }: Props) {
     return (
@@ -44,7 +44,7 @@ export function PersonalDataForm({ data, onChange }: Props) {
                     <input
                         type={type ?? "text"}
                         placeholder={placeholder}
-                        value={data[field] as string | number}
+                        value={type === "number" && data[field] === 0 ? "" : data[field] as string | number}
                         onChange={(e) =>
                             onChange(field, type === "number" ? Number(e.target.value) : e.target.value)
                         }

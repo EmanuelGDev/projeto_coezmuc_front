@@ -1,4 +1,3 @@
-
 import type { HealthData } from "../../../types/subscription";
 import { FormField } from "./FormField";
 
@@ -7,37 +6,42 @@ type Props = {
     onChange: (field: keyof HealthData, value: string) => void;
 };
 
-const textareaClass = "w-full border rounded-lg p-2";
+const textareaClass = `
+    w-full border border-[#E8DDD0] rounded-lg px-4 py-2.5
+    bg-[#FAF7F2] text-[#3D2C1E] text-sm font-sans
+    placeholder:text-[#C4B49A]
+    focus:outline-none focus:border-[#B07D4A] focus:bg-white
+    transition-colors duration-200
+    resize-none min-h-[80px]
+`;
 
 const healthFields: {
-    field: keyof HealthData; // HealthData só tem string keys, então aqui está ok
+    field: keyof HealthData;
     label: string;
     placeholder: string;
 }[] = [
     {
         field: "restricaoAlimentar",
-        label: "Possui alguma restrição alimentar?",
-        placeholder: "Restrição Alimentar",
+        label: "Restrição Alimentar",
+        placeholder: "Descreva alguma restrição alimentar, se houver...",
     },
     {
         field: "restricaoMedica",
-        label: "Possui alguma restrição médica?",
-        placeholder: "Restrição Médica",
+        label: "Restrição Médica",
+        placeholder: "Descreva alguma restrição médica, se houver...",
     },
     {
         field: "cuidadosEspeciais",
-        label: "Possui algum cuidado especial que devemos saber?",
-        placeholder: "Cuidados Especiais",
+        label: "Cuidados Especiais",
+        placeholder: "Há algo que devemos saber para melhor cuidar de você?",
     },
 ];
 
 export function HealthDataForm({ data, onChange }: Props) {
     return (
-        <div className="space-y-4">
-            <h2 className="text-lg font-medium text-gray-700">Dados de Saúde</h2>
-
+        <div className="space-y-5">
             {healthFields.map(({ field, label, placeholder }) => (
-                <FormField key={String(field)} label={label}> {/* 👈 String() resolve o symbol no key */}
+                <FormField key={String(field)} label={label}>
                     <textarea
                         placeholder={placeholder}
                         value={data[field]}

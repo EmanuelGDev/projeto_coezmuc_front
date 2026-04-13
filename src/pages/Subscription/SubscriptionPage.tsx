@@ -104,6 +104,7 @@ export default function SubscriptionPage() {
                         <button
                             onClick={handleSubmit}
                             className="
+                                cursor-pointer
                                 w-full bg-[#3D2C1E] text-[#FAF7F2]
                                 font-sans text-sm tracking-widest uppercase
                                 py-4 rounded-xl
