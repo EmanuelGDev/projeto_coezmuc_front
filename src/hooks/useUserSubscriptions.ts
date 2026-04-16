@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { Subscription, UserSubscriptionsResponse } from 'types/subscription'
+
 import { useAuth } from '@/contexts/Context'
 
 export function useUserSubscriptions(userId: string) {

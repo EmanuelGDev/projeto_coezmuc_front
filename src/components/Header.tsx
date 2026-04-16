@@ -4,20 +4,18 @@ import logo from "../assets/logo.png";
 import { useAuth } from "@/contexts/Context";
 import { SubscriptionModal } from "./UserSubscriptionsModal/SubscriptionModal";
 
-
 export default function Header() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
-  // Fecha o dropdown ao clicar fora
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -41,6 +39,15 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-3">
+          {user?.isAdmin && (
+            <button
+              className="cursor-pointer px-4 py-2 text-sm font-medium text-[#B07D4A] border border-[#B07D4A] rounded-lg hover:bg-[#F0E6D3] transition"
+              onClick={() => navigate('/admin')}
+            >
+              Painel Admin
+            </button>
+          )}
+
           <button
             className="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#B07D4A] rounded-lg hover:bg-[#3D2C1E] transition"
             onClick={() => navigate(user ? '/subscription' : '/auth/login')}
@@ -56,7 +63,7 @@ export default function Header() {
               Login
             </button>
           ) : (
-            <div className="relative " ref={dropdownRef}>
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(prev => !prev)}
                 className="cursor-pointer flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100 rounded-lg transition"
