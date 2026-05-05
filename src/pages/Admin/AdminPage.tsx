@@ -3,22 +3,25 @@ import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
 import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
 import type { Subscription } from "../../../types/subscription";
+import { useNavigate } from "react-router-dom";
 
 interface ApiResponse {
   data: Subscription[];
 }
 
+
+
 const PAGE_SIZE = 15;
 
 const statusConfig = {
-  active:    { label: "Ativo",     bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]", dot: "bg-[#4CAF50]" },
-  pending:   { label: "Pendente",  bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]", dot: "bg-[#F59E0B]" },
+  active: { label: "Ativo", bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]", dot: "bg-[#4CAF50]" },
+  pending: { label: "Pendente", bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]", dot: "bg-[#F59E0B]" },
   cancelled: { label: "Cancelado", bg: "bg-[#FDECEA]", text: "text-[#991B1B]", dot: "bg-[#EF4444]" },
 };
 
 const paymentConfig = {
-  paid:    { label: "Pago",     bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]" },
-  partial: { label: "Parcial",  bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]" },
+  paid: { label: "Pago", bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]" },
+  partial: { label: "Parcial", bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]" },
   pending: { label: "Pendente", bg: "bg-[#FDECEA]", text: "text-[#991B1B]" },
 };
 
@@ -46,6 +49,7 @@ function PaymentBadge({ status }: { status: string }) {
 }
 
 export default function AdminPage() {
+  const navigate = useNavigate();
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -125,6 +129,12 @@ export default function AdminPage() {
               <p className="text-[#8C7355] text-sm font-sans mt-1">
                 {subscriptions.length} inscrição{subscriptions.length !== 1 ? "s" : ""} no total
               </p>
+              <button
+                onClick={() => navigate("/admin/financeiro")}
+                className="px-4 py-2 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors"
+              >
+                Financeiro
+              </button>
             </div>
 
             {/* Search */}
@@ -146,10 +156,10 @@ export default function AdminPage() {
         {/* Stats row */}
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total",      value: subscriptions.length,                                                              color: "text-[#3D2C1E]"  },
-            { label: "Ativos",     value: subscriptions.filter(s => s.status.subscriptionStatus === "active").length,    color: "text-[#2E7D32]"  },
-            { label: "Pendentes",  value: subscriptions.filter(s => s.status.subscriptionStatus === "pending").length,   color: "text-[#8C6D1F]"  },
-            { label: "Cancelados", value: subscriptions.filter(s => s.status.subscriptionStatus === "cancelled").length, color: "text-[#991B1B]"  },
+            { label: "Total", value: subscriptions.length, color: "text-[#3D2C1E]" },
+            { label: "Ativos", value: subscriptions.filter(s => s.status.subscriptionStatus === "active").length, color: "text-[#2E7D32]" },
+            { label: "Pendentes", value: subscriptions.filter(s => s.status.subscriptionStatus === "pending").length, color: "text-[#8C6D1F]" },
+            { label: "Cancelados", value: subscriptions.filter(s => s.status.subscriptionStatus === "cancelled").length, color: "text-[#991B1B]" },
           ].map(({ label, value, color }) => (
             <div key={label} className="bg-white border border-[#E8DDD0] rounded-xl p-4">
               <p className="text-xs font-sans tracking-widest uppercase text-[#8C7355] mb-1">{label}</p>
@@ -241,11 +251,10 @@ export default function AdminPage() {
                   <button
                     key={p}
                     onClick={() => setPage(p)}
-                    className={`w-8 h-8 text-xs font-sans rounded-lg border transition-colors ${
-                      p === page
+                    className={`w-8 h-8 text-xs font-sans rounded-lg border transition-colors ${p === page
                         ? "bg-[#3D2C1E] text-[#FAF7F2] border-[#3D2C1E]"
                         : "border-[#E8DDD0] text-[#8C7355] hover:bg-[#F0E6D3]"
-                    }`}
+                      }`}
                   >
                     {p}
                   </button>

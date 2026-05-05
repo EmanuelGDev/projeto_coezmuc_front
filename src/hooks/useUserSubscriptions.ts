@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/contexts/Context'
+import type { Subscription, UserSubscriptionsResponse } from '../../types/subscription'
 
 export function useUserSubscriptions(userId: string) {
   const [data, setData] = useState<Subscription[]>([])

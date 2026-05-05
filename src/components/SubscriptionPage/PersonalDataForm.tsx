@@ -22,6 +22,7 @@ const textFields: {
     required?: boolean;
 }[] = [
         { field: "name", label: "Nome Completo", type: "text", placeholder: "Como você se chama?", required: true },
+        { field: "cpf", label: "CPF", type: "text", placeholder: "000.000.000-00", required: true },
         { field: "age", label: "Idade", type: "number", placeholder: "Sua idade", required: true },
         { field: "phoneNumber", label: "Telefone", type: "text", placeholder: "(00) 00000-0000", required: true },
         { field: "city", label: "Cidade", type: "text", placeholder: "Sua cidade", required: true },

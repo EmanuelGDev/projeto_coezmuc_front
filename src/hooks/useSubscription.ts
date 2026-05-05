@@ -12,6 +12,7 @@ import type { HealthData, PersonalData } from "../../types/subscription";
 
 const initialPersonalData: PersonalData = {
     name: "",
+    cpf: "",
     age: 0,
     phoneNumber: "",
     city: "",
@@ -63,7 +64,7 @@ export function useSubscription() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || "Preencha todos os campos obrigatórios.");
+                throw new Error(data.error || "Preencha todos os campos obrigatorios");
             }
 
             toast.success("Inscrição realizada com sucesso!");

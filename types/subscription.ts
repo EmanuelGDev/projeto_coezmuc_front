@@ -1,5 +1,6 @@
 export interface PersonalData {
   name: string
+  cpf: string
   age: number
   phoneNumber: string
   city: string

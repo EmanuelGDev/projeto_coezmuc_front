@@ -34,7 +34,7 @@ export default function About() {
             Sobre o Evento
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#3D2C1E] mb-6 leading-tight">
-            O Que É o COEZMUC?
+            O Que É a COEZMUC?
           </h2>
           <p className="text-[#6B5240] text-lg leading-relaxed max-w-3xl mx-auto font-sans">
             O COEZMUC é um evento anual de confraternização espírita que reúne pessoas de todas as idades
