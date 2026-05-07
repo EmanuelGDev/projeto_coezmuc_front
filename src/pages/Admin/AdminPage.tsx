@@ -60,7 +60,7 @@ export default function AdminPage() {
 
   async function fetchSubscriptions() {
     try {
-      const response = await fetch("http://127.0.0.1:3333/subscription", {
+      const response = await fetch("https://projeto-coezmuc.onrender.com/subscription", {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
       const result: ApiResponse = await response.json();
@@ -76,7 +76,7 @@ export default function AdminPage() {
 
   async function getSubscription(id: string) {
     try {
-      const response = await fetch(`http://127.0.0.1:3333/subscription/${id}`, {
+      const response = await fetch(`https://projeto-coezmuc.onrender.com/subscription/${id}`, {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
       const result = await response.json();

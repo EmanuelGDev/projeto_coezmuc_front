@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
 
     try{
-      const response = await fetch('http://localhost:3333/auth/login', {
+      const response = await fetch('https://projeto-coezmuc.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

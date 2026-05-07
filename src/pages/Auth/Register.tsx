@@ -18,7 +18,7 @@ export default function Register() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3333/user/create", {
+      const response = await fetch("https://projeto-coezmuc.onrender.com/user/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

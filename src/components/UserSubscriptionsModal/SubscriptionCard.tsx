@@ -1,4 +1,5 @@
-import type { Subscription } from "types/subscription";
+import type { Subscription } from "../../../types/subscription";
+
 
 
 type Props = {
