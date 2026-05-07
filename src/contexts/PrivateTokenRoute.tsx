@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "@/contexts/Context";
+import { useAuth } from "@/contexts/Context.tsx";
 
 export function PrivateTokenRoute({ children }: any) {
 

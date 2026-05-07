@@ -1,5 +1,5 @@
 
-import { useAuth } from "@/contexts/Context";
+import { useAuth } from "@/contexts/Context.tsx";
 
 export function PrivateAdminRoute({ children }: any) {
 
