@@ -165,7 +165,7 @@ export default function SubscriptionModal({ subscription, isOpen, onClose, onUpd
     setError(null);
     setSuccess(false);
     try {
-      const response = await fetch(`http://127.0.0.1:3333/subscription/update/${payload._id}`, {
+      const response = await fetch(`https://projeto-coezmuc.onrender.com/subscription/update/${payload._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
