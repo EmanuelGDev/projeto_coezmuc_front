@@ -53,7 +53,7 @@ export function useSubscription() {
         }
 
         try {
-            const response = await fetch("http://localhost:3333/subscription/create", {
+            const response = await fetch("https://projeto-coezmuc.onrender.com/subscription/create", {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
                     "Authorization" : `Bearer ${user?.token}`

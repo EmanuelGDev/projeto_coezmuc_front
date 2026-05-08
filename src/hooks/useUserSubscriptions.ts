@@ -15,7 +15,7 @@ export function useUserSubscriptions(userId: string) {
     setLoading(true)
     setError(null)
 
-    fetch(`http://127.0.0.1:3333/subscription/userSubscriptions/${userId}`, {
+    fetch(`https://projeto-coezmuc.onrender.com/subscription/userSubscriptions/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
