@@ -17,7 +17,7 @@ export default function FinancePage() {
 
   async function fetchRevenues() {
     try {
-      const response = await fetch("https://projeto-coezmuc.onrender.com/revenue", {
+      const response = await fetch("http://localhost:3333/revenue", {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },
