@@ -165,7 +165,7 @@ export default function SubscriptionModal({ subscription, isOpen, onClose, onUpd
     setError(null);
     setSuccess(false);
     try {
-      const response = await fetch(`http://localhost:3000/subscription/update/${payload._id}`, {
+      const response = await fetch(`http://localhost:3333/subscription/update/${payload._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
