@@ -1,4 +1,3 @@
-import { useAuth } from "@/contexts/Context";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -13,7 +12,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const passwordRef = useRef<HTMLInputElement>(null);
-  const { user } = useAuth();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +22,6 @@ export default function Register() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
         },
         body: JSON.stringify({ username, email, password, confirmPassword }),
       });
