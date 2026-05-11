@@ -16,6 +16,7 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("API URL:", config.apiUrl);
     setIsLoading(true);
     try {
       const response = await fetch(`${config.apiUrl}/user/create`, {
