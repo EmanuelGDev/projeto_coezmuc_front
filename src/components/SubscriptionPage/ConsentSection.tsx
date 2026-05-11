@@ -36,7 +36,7 @@ export function ConsentSection({ imageConsent, regulationsConsent, onChange }: P
                 <svg className="w-4 h-4 text-[#B07D4A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <p className="text-sm text-[#6B5240] font-sans">
+                <p className="text-base text-[#6B5240] font-sans">
                     Acesse o{" "}
                     <a
                         href="https://drive.google.com/file/d/17nxvRTpklBFdhWaLdsEOYKK_5svuf0l_/view?usp=sharing"
@@ -82,10 +82,10 @@ export function ConsentSection({ imageConsent, regulationsConsent, onChange }: P
 
                     {/* Text */}
                     <div>
-                        <p className="text-sm font-sans font-medium text-[#3D2C1E] leading-snug">
+                        <p className="text-base font-sans font-medium text-[#3D2C1E] leading-snug">
                             {label} <span className="text-[#C0623A]">*</span>
                         </p>
-                        <p className="text-xs text-[#8C7355] mt-0.5 leading-relaxed">{description}</p>
+                        <p className="text-[13px] text-[#8C7355] mt-0.5 leading-relaxed">{description}</p>
                     </div>
                 </label>
             ))}

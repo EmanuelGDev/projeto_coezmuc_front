@@ -8,7 +8,7 @@ type Props = {
 
 const textareaClass = `
     w-full border border-[#E8DDD0] rounded-lg px-4 py-2.5
-    bg-[#FAF7F2] text-[#3D2C1E] text-sm font-sans
+    bg-[#FAF7F2] text-[#3D2C1E] text-base font-sans
     placeholder:text-[#C4B49A]
     focus:outline-none focus:border-[#B07D4A] focus:bg-white
     transition-colors duration-200

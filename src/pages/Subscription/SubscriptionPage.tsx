@@ -4,6 +4,8 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { PersonalDataForm } from "@/components/SubscriptionPage/PersonalDataForm";
 import { HealthDataForm } from "@/components/SubscriptionPage/HealthDataForm";
 import { ConsentSection } from "@/components/SubscriptionPage/ConsentSection";
+import { InfoSection } from "@/components/SubscriptionPage/InfoSection";
+
 
 export default function SubscriptionPage() {
     const { isLoading } = useAuth();
@@ -81,7 +83,7 @@ export default function SubscriptionPage() {
                     <div className="h-px bg-[#E8DDD0]" />
 
                     {/* Section: Consentimentos */}
-                    <div className="bg-white border border-[#E8DDD0] rounded-b-2xl overflow-hidden">
+                    <div className="bg-white border-x border-[#E8DDD0] overflow-hidden">
                         <div className="bg-[#F5EDE0] px-8 py-4 border-b border-[#E8DDD0]">
                             <div className="flex items-center gap-3">
                                 <span className="w-7 h-7 rounded-full bg-[#B07D4A] flex items-center justify-center text-white text-xs font-sans font-semibold">
@@ -98,6 +100,9 @@ export default function SubscriptionPage() {
                             />
                         </div>
                     </div>
+
+                    {/* Info sections: Financial + General (sections 4 and 5) */}
+                    <InfoSection />
 
                     {/* Submit button */}
                     <div className="pt-6 pb-2">
