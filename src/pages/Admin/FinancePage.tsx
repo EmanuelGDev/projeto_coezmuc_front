@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/Context";
+import { config } from "@/config/env";
 
 type Revenue = {
   _id: string;
@@ -17,7 +18,7 @@ export default function FinancePage() {
 
   async function fetchRevenues() {
     try {
-      const response = await fetch("http://localhost:3333/revenue", {
+      const response = await fetch(`${config.apiUrl}/revenue`, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },

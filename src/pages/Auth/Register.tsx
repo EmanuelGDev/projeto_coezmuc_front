@@ -2,6 +2,7 @@ import { useAuth } from "@/contexts/Context";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { config } from "@/config/env"
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ export default function Register() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("https://projeto-coezmuc.onrender.com/user/create", {
+      const response = await fetch(`${config.apiUrl}/user/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

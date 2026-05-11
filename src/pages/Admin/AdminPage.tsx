@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
 import type { Subscription } from "../../../types/subscription";
 import { useNavigate } from "react-router-dom";
+import { config } from "@/config/env";
 
 interface ApiResponse {
   data: Subscription[];
@@ -60,7 +61,7 @@ export default function AdminPage() {
 
   async function fetchSubscriptions() {
     try {
-      const response = await fetch("https://projeto-coezmuc.onrender.com/subscription", {
+      const response = await fetch(`${config.apiUrl}/subscription`, {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
       const result: ApiResponse = await response.json();
@@ -76,7 +77,7 @@ export default function AdminPage() {
 
   async function getSubscription(id: string) {
     try {
-      const response = await fetch(`https://projeto-coezmuc.onrender.com/subscription/${id}`, {
+      const response = await fetch(`${config.apiUrl}/subscription/${id}`, {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
       const result = await response.json();
