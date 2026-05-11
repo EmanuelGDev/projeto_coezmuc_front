@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/contexts/Context'
 import type { Subscription, UserSubscriptionsResponse } from '../../types/subscription'
+import { config } from '@/config/env'
 
 export function useUserSubscriptions(userId: string) {
   const [data, setData] = useState<Subscription[]>([])
@@ -15,7 +16,7 @@ export function useUserSubscriptions(userId: string) {
     setLoading(true)
     setError(null)
 
-    fetch(`https://projeto-coezmuc.onrender.com/subscription/userSubscriptions/${userId}`, {
+    fetch(`${config.apiUrl}/subscription/userSubscriptions/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

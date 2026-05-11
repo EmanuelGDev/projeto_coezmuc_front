@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/contexts/Context";
 import type { HealthData, PaymentData, PersonalData, Subscription } from "../../../types/subscription";
+import { config } from "@/config/env"
 
 interface Props {
   subscription: Subscription | null;
@@ -165,7 +166,7 @@ export default function SubscriptionModal({ subscription, isOpen, onClose, onUpd
     setError(null);
     setSuccess(false);
     try {
-      const response = await fetch(`https://projeto-coezmuc.onrender.com/subscription/update/${payload._id}`, {
+      const response = await fetch(`${config.apiUrl}/subscription/update/${payload._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

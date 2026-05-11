@@ -1,3 +1,4 @@
+import { config } from '@/config/env';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface User {
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
 
     try{
-      const response = await fetch('https://projeto-coezmuc.onrender.com/auth/login', {
+      const response = await fetch(`${config.apiUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

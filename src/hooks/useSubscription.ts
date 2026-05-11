@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/contexts/Context";
 import type { HealthData, PersonalData } from "../../types/subscription";
+import { config } from "@/config/env";
 
 
 
@@ -53,7 +54,7 @@ export function useSubscription() {
         }
 
         try {
-            const response = await fetch("https://projeto-coezmuc.onrender.com/subscription/create", {
+            const response = await fetch(`${config.apiUrl}/subscription/create`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json",
                     "Authorization" : `Bearer ${user?.token}`
