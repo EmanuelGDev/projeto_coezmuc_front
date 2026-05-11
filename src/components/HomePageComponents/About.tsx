@@ -34,9 +34,9 @@ export default function About() {
             Sobre o Evento
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#3D2C1E] mb-6 leading-tight">
-            O que é a COEZMUC?
+            O Que É a COEZMUC?
           </h2>
-          <p className="text-[#6B5240] text-lg leading-relaxed max-w-3xl mx-auto font-sans">
+          <p className="text-[#6B5240] text-xl leading-relaxed max-w-3xl mx-auto font-sans">
             O COEZMUC é um evento anual de confraternização espírita que reúne pessoas de todas as idades
             para estudar, refletir e compartilhar experiências sobre os ensinamentos de Jesus e a prática
             do espiritismo. Cada edição aborda questões relevantes para nossa jornada espiritual e crescimento moral.
@@ -47,7 +47,7 @@ export default function About() {
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-[#E8DDD0]" />
-            <p className="text-sm font-sans tracking-[0.2em] uppercase text-[#B07D4A]">Últimos Temas</p>
+            <p className="text-base font-sans tracking-[0.2em] uppercase text-[#B07D4A]">Últimos Temas</p>
             <div className="h-px flex-1 bg-[#E8DDD0]" />
           </div>
 
@@ -63,8 +63,8 @@ export default function About() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg text-[#3D2C1E] mb-1.5 leading-snug">{feature.title}</h3>
-                  <p className="text-[#8C7355] text-sm leading-relaxed font-sans">{feature.description}</p>
+                  <h3 className="font-serif text-l text-[#3D2C1E] mb-1.5 leading-snug">{feature.title}</h3>
+                  <p className="text-[#8C7355] text-base leading-relaxed font-sans">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -79,14 +79,14 @@ export default function About() {
                 A Experiência
               </span>
               <h3 className="font-serif text-3xl text-[#FAF7F2] mb-5 leading-tight">
-                Cinco dias de imersão total
+                Cinco Dias de Imersão Total
               </h3>
-              <p className="text-[#C4B49A] text-sm leading-relaxed font-sans mb-4">
+              <p className="text-[#C4B49A] text-lg leading-relaxed font-sans mb-4">
                 Durante cinco dias intensos, você participará de palestras inspiradoras, painéis de discussão
                 e atividades interativas que enriquecerão seu conhecimento e fortalecerão sua conexão com a
                 comunidade espírita.
               </p>
-              <p className="text-[#C4B49A] text-sm leading-relaxed font-sans">
+              <p className="text-[#C4B49A] text-lg leading-relaxed font-sans">
                 Junte-se a nós para uma jornada de aprendizado, crescimento espiritual e confraternização com
                 pessoas que compartilham dos mesmos ideais.
               </p>
@@ -95,7 +95,7 @@ export default function About() {
               <img
                 src="https://images.unsplash.com/photo-1474314881477-04c4aac40a0e?w=500&auto=format&fit=crop&q=60"
                 alt="Evento COEZMUC"
-                className="absolute inset-0 w-full h-full object-cover opacity-70"
+                className="absolute inset-0 w-full h-full object-center   opacity-70"
               />
               <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#3D2C1E]/50" />
             </div>

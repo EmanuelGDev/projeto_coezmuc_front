@@ -51,7 +51,7 @@ export default function CtaSection() {
                 <div className="flex-shrink-0 w-6 h-6 bg-[#B07D4A]/20 border border-[#B07D4A]/40 rounded-full flex items-center justify-center mt-0.5">
                   <TriangleAlert className="w-3 h-3 text-[#D4A96A]" />
                 </div>
-                <span className="text-[#C4B49A] text-sm leading-relaxed font-sans text-lg">{warning}</span>
+                <span className="text-[#C4B49A] text-base leading-relaxed font-sans ">{warning}</span>
               </li>
             ))}
           </ul>
