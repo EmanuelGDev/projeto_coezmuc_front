@@ -8,8 +8,9 @@ export default function CtaSection() {
 
   const warnings = [
     "As inscrições são sujeitas à aprovação da coordenação",
-    "A coordenação não realiza cobrança do valor da inscrição",
+    "O não pagamento da taxa de inscrição no prazo determinado provocará a sua invalidação, pois a coordenação não realizará cobrança.",
     "Não serão feitas inscrições no lugar do evento",
+    "Valores, prazos e demais recomendações estão no regulamento.",
   ];
 
   return (
@@ -27,30 +28,30 @@ export default function CtaSection() {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <span className="inline-block text-xs font-sans tracking-[0.2em] uppercase text-[#D4A96A] border border-[#B07D4A]/40 px-4 py-1.5 rounded-full mb-6">
+          <span className="inline-block text-sm font-sans tracking-[0.2em] uppercase text-[#D4A96A] border border-[#B07D4A]/40 px-4 py-1.5 rounded-full mb-6">
             Inscrições Abertas
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#FAF7F2] mb-4 leading-tight">
             Não Perca Esta Oportunidade
           </h2>
-          <p className="text-[#C4B49A] text-lg font-sans mb-2">
+          <p className="text-[#C4B49A] text-xl font-sans mb-2">
             As vagas são limitadas. Garanta já a sua inscrição.
           </p>
-          <p className="text-[#8C7355] text-sm font-sans">
+          <p className="text-[#8C7355] text-lg font-sans">
             Inscrições até 31 de Dezembro de 2026
           </p>
         </div>
 
         {/* Avisos */}
         <div className="bg-[#FAF7F2]/5 border border-[#B07D4A]/30 rounded-2xl p-8 md:p-10 mb-8 ">
-          <h3 className="font-serif text-xl text-[#D4A96A] mb-6 text-center">Lembre-se</h3>
+          <h3 className="font-serif text-2xl text-[#D4A96A] mb-6 text-center">Lembre-se</h3>
           <ul className="space-y-4 mb-8 flex flex-col items-center">
             {warnings.map((warning, index) => (
               <li key={index} className="flex items-start gap-4 max-w-sm w-full">
                 <div className="flex-shrink-0 w-6 h-6 bg-[#B07D4A]/20 border border-[#B07D4A]/40 rounded-full flex items-center justify-center mt-0.5">
                   <TriangleAlert className="w-3 h-3 text-[#D4A96A]" />
                 </div>
-                <span className="text-[#C4B49A] text-sm leading-relaxed font-sans">{warning}</span>
+                <span className="text-[#C4B49A] text-sm leading-relaxed font-sans text-lg">{warning}</span>
               </li>
             ))}
           </ul>
@@ -75,7 +76,7 @@ export default function CtaSection() {
 
         {/* Contact */}
         <div className="text-center">
-          <p className="text-[#8C7355] text-sm font-sans mb-3 leading-relaxed">
+          <p className="text-[#8C7355] text-lg font-sans mb-3 leading-relaxed">
             Acesse o{" "}
             <a
               href="https://drive.google.com/file/d/17nxvRTpklBFdhWaLdsEOYKK_5svuf0l_/view?usp=sharing"
@@ -89,7 +90,7 @@ export default function CtaSection() {
           </p>
           <a
             href="mailto:coezmuc123@gmail.com"
-            className="text-[#D4A96A] text-sm font-sans hover:text-[#FAF7F2] transition-colors tracking-wide"
+            className="text-[#D4A96A] text-lg font-sans hover:text-[#FAF7F2] transition-colors tracking-wide"
           >
             coezmuc123@gmail.com
           </a>

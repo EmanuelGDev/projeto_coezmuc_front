@@ -25,7 +25,7 @@ export default function Banner() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         {/* Badge */}
         <div className="inline-block mb-6">
-          <span className="text-xs font-sans tracking-[0.25em] uppercase text-[#D4A96A] border border-[#B07D4A]/50 px-5 py-2 rounded-full">
+          <span className="text-lg font-sans tracking-[0.25em] uppercase text-[#D4A96A]  px-5 py-2 rounded-full">
             Confraternização Espírita da Zona do Mucuri
           </span>
         </div>
@@ -37,19 +37,21 @@ export default function Banner() {
           2027
         </p>
 
-        <p className="text-base md:text-lg text-[#C4B49A] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+        <p className="text-base md:text-2xl text-[#C4B49A] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
           Inscreva-se e venha estudar conosco sobre como podemos seguir
           <span className="text-[#D4A96A] font-medium"> Pelos Caminhos de Jesus</span>
         </p>
 
         {/* Meta info */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
-          <div className="flex items-center gap-2.5 text-[#C4B49A] text-sm font-sans">
+          <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-lg font-sans">
             <span className="w-1 h-1 rounded-full bg-[#B07D4A] inline-block" />
             06–10 de Fevereiro, 2027
           </div>
+
           <div className="hidden sm:block w-px h-4 bg-[#B07D4A]/40" />
-          <div className="flex items-center gap-2.5 text-[#C4B49A] text-sm font-sans">
+
+          <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-lg font-sans">
             <span className="w-1 h-1 rounded-full bg-[#B07D4A] inline-block" />
             Escola Waldemar Rocha Neves, Teófilo Otoni
           </div>
@@ -65,6 +67,7 @@ export default function Banner() {
             hover:bg-[#C49060]
             active:scale-[0.98]
             transition-all duration-300
+            text-xl md:text-2xl
           "
         >
           Inscreva-se

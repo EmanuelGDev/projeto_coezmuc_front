@@ -6,14 +6,14 @@ export default function VideoSection() {
       <div className="max-w-5xl mx-auto">
 
         <div className="text-center mb-12">
-          <span className="inline-block text-xs font-sans tracking-[0.2em] uppercase text-[#B07D4A] bg-[#F0E6D3] px-4 py-1.5 rounded-full mb-5">
+          <span className="inline-block text-sm font-sans tracking-[0.2em] uppercase text-[#B07D4A] bg-[#F0E6D3] px-4 py-1.5 rounded-full mb-5">
             Edição Anterior
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#3D2C1E] mb-4 leading-tight">
-            Veja Como Foi 2026
+            Veja como foi 2026
           </h2>
-          <p className="text-[#8C7355] text-base leading-relaxed max-w-xl mx-auto font-sans">
-            Assista aos destaques do COEZMUC 2026 e reviva os momentos mais inspiradores,
+          <p className="text-[#8C7355] text-xl leading-relaxed max-w-xl mx-auto font-sans">
+            Assista aos destaques da COEZMUC 2026 e reviva os momentos mais inspiradores,
             emocionantes e transformadores do evento.
           </p>
         </div>

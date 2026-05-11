@@ -34,7 +34,7 @@ export default function About() {
             Sobre o Evento
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#3D2C1E] mb-6 leading-tight">
-            O Que É a COEZMUC?
+            O que é a COEZMUC?
           </h2>
           <p className="text-[#6B5240] text-lg leading-relaxed max-w-3xl mx-auto font-sans">
             O COEZMUC é um evento anual de confraternização espírita que reúne pessoas de todas as idades
@@ -47,7 +47,7 @@ export default function About() {
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-[#E8DDD0]" />
-            <p className="text-xs font-sans tracking-[0.2em] uppercase text-[#B07D4A]">Últimos Temas</p>
+            <p className="text-sm font-sans tracking-[0.2em] uppercase text-[#B07D4A]">Últimos Temas</p>
             <div className="h-px flex-1 bg-[#E8DDD0]" />
           </div>
 
@@ -79,7 +79,7 @@ export default function About() {
                 A Experiência
               </span>
               <h3 className="font-serif text-3xl text-[#FAF7F2] mb-5 leading-tight">
-                Cinco Dias de Imersão Total
+                Cinco dias de imersão total
               </h3>
               <p className="text-[#C4B49A] text-sm leading-relaxed font-sans mb-4">
                 Durante cinco dias intensos, você participará de palestras inspiradoras, painéis de discussão
