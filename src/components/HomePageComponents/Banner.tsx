@@ -67,7 +67,8 @@ export default function Banner() {
             hover:bg-[#C49060]
             active:scale-[0.98]
             transition-all duration-300
-            text-xl md:text-2xl
+            text-xl md:text-xl
+            cursor-pointer
           "
         >
           Inscreva-se

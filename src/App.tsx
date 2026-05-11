@@ -9,6 +9,8 @@ import { PrivateTokenRoute } from "./contexts/PrivateTokenRoute"
 import { PrivateAdminRoute } from "./contexts/PrivateAdminRoute"
 import AdminPage from "./pages/Admin/AdminPage"
 import FinancePage from "./pages/Admin/FinancePage"
+import MySubscriptionsPage from "./pages/MySubscriptions/MySubscriptionsPage"
+
 
 
 
@@ -24,8 +26,9 @@ function App() {
           <Route path="/auth/register" element={<Register />} />
 
           <Route path="/admin" element={<PrivateAdminRoute><PrivateTokenRoute><AdminPage /></PrivateTokenRoute></PrivateAdminRoute>} />
-          {<Route path="/admin/financeiro" element={<PrivateAdminRoute><PrivateTokenRoute><FinancePage /></PrivateTokenRoute></PrivateAdminRoute>} /> }
+          {<Route path="/admin/financeiro" element={<PrivateAdminRoute><PrivateTokenRoute><FinancePage /></PrivateTokenRoute></PrivateAdminRoute>} />}
           <Route path="/subscription/*" element={<PrivateTokenRoute><SubscriptionPage /></PrivateTokenRoute>} />
+          <Route path="/my-subscriptions" element={<PrivateTokenRoute><MySubscriptionsPage /></PrivateTokenRoute>} />
           <Route path="*" element={<h1>404 - Not Found</h1>} />
         </Routes>
       </AuthProvider>

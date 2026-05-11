@@ -22,7 +22,7 @@ const textFields: {
     required?: boolean;
 }[] = [
     { field: "name", label: "Nome Completo", type: "text", placeholder: "Como você se chama?", required: true },
-    { field: "cpf", label: "CPF", type: "text", placeholder: "000.000.000-00", required: true },
+    { field: "cpf", label: "CPF", type: "text", placeholder: "00000000000", required: true },
     { field: "age", label: "Idade", type: "number", placeholder: "Sua idade", required: true },
     { field: "phoneNumber", label: "Telefone", type: "text", placeholder: "(00) 00000-0000", required: true },
     { field: "city", label: "Cidade", type: "text", placeholder: "Sua cidade", required: true },
@@ -45,6 +45,7 @@ export function PersonalDataForm({ data, onChange }: Props) {
                     <input
                         type={type ?? "text"}
                         placeholder={placeholder}
+                        maxLength={field === "cpf" ? 11 : undefined}
                         value={type === "number" && data[field] === 0 ? "" : data[field] as string | number}
                         onChange={(e) =>
                             onChange(field, type === "number" ? Number(e.target.value) : e.target.value)

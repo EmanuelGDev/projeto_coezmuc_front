@@ -69,7 +69,7 @@ export function useSubscription() {
             }
 
             toast.success("Inscrição realizada com sucesso!");
-            navigate("/");
+            navigate("/my-subscriptions");
         } catch (error: any) {
             toast.error(error.message);
         }
