@@ -34,10 +34,10 @@ export default function About() {
             Sobre o Evento
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#3D2C1E] mb-6 leading-tight">
-            O Que É a COEZMUC?
+            O que é a COEZMUC?
           </h2>
           <p className="text-[#6B5240] text-xl leading-relaxed max-w-3xl mx-auto font-sans">
-            O COEZMUC é um evento anual de confraternização espírita que reúne pessoas de todas as idades
+            A COEZMUC é um evento anual de confraternização espírita que reúne pessoas de todas as idades
             para estudar, refletir e compartilhar experiências sobre os ensinamentos de Jesus e a prática
             do espiritismo. Cada edição aborda questões relevantes para nossa jornada espiritual e crescimento moral.
           </p>
@@ -79,7 +79,7 @@ export default function About() {
                 A Experiência
               </span>
               <h3 className="font-serif text-3xl text-[#FAF7F2] mb-5 leading-tight">
-                Cinco Dias de Imersão Total
+                Cinco dias de imersão total
               </h3>
               <p className="text-[#C4B49A] text-lg leading-relaxed font-sans mb-4">
                 Durante cinco dias intensos, você participará de palestras inspiradoras, painéis de discussão

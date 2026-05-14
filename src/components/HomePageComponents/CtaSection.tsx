@@ -32,7 +32,7 @@ export default function CtaSection() {
             Inscrições Abertas
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-[#FAF7F2] mb-4 leading-tight">
-            Não Perca Esta Oportunidade
+            Não perca esta oportunidade
           </h2>
           <p className="text-[#C4B49A] text-xl font-sans mb-2">
             As vagas são limitadas. Garanta já a sua inscrição.

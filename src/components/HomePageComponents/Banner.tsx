@@ -37,7 +37,7 @@ export default function Banner() {
           2027
         </p>
 
-        <p className="text-base md:text-2xl text-[#C4B49A] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+        <p className="text-base md:text-xl text-[#C4B49A] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
           Inscreva-se e venha estudar conosco sobre como podemos seguir
           <span className="text-[#D4A96A] font-medium"> Pelos Caminhos de Jesus</span>
         </p>
