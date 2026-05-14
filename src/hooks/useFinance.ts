@@ -23,7 +23,7 @@ export type TypeSummary = {
 
 // ----- Helpers -----
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3333";
+const BASE_URL = import.meta.env.VITE_API_KEY ?? "http://localhost:3333";
 
 function authHeaders(token: string): HeadersInit {
   return {
