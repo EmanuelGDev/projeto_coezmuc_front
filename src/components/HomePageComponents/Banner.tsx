@@ -38,20 +38,20 @@ export default function Banner() {
         </p>
 
         <p className="text-base md:text-xl text-[#C4B49A] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
-          Inscreva-se e venha estudar conosco sobre como podemos seguir
-          <span className="text-[#D4A96A] font-medium"> Pelos Caminhos de Jesus</span>
+          Inscreva-se e venha estudar conosco sobre como podemos seguir<br></br>
+          <span className="text-[#D4A96A] font-medium text-2xl"> Pelos Caminhos de Jesus</span>
         </p>
 
         {/* Meta info */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
-          <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-lg font-sans">
+          <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-xl font-sans">
             <span className="w-1 h-1 rounded-full bg-[#B07D4A] inline-block" />
             06–10 de Fevereiro, 2027
           </div>
 
           <div className="hidden sm:block w-px h-4 bg-[#B07D4A]/40" />
 
-          <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-lg font-sans">
+          <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-xl font-sans">
             <span className="w-1 h-1 rounded-full bg-[#B07D4A] inline-block" />
             Escola Waldemar Rocha Neves, Teófilo Otoni
           </div>
@@ -67,7 +67,7 @@ export default function Banner() {
             hover:bg-[#C49060]
             active:scale-[0.98]
             transition-all duration-300
-            text-xl md:text-xl
+            text-xl md:text-base
             cursor-pointer
           "
         >
