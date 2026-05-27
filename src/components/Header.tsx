@@ -37,14 +37,6 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-3">
-          {user?.isAdmin && (
-            <button
-              className="cursor-pointer px-4 py-2 text-sm font-medium text-[#B07D4A] border border-[#B07D4A] rounded-lg hover:bg-[#F0E6D3] transition"
-              onClick={() => navigate('/admin')}
-            >
-              Painel Admin
-            </button>
-          )}
 
           <button
             className="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#B07D4A] rounded-lg hover:bg-[#3D2C1E] transition"
@@ -91,6 +83,33 @@ export default function Header() {
                   </button>
 
                   <div className="border-t border-gray-100" />
+
+                  {user?.isAdmin && (
+                    <button
+                      onClick={() => { navigate('/my-subscriptions'); setDropdownOpen(false); }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                      Minhas inscrições
+                    </button>
+
+
+                  )}
+                  {user?.isAdmin && (
+                    <button
+                      onClick={() => { navigate('/admin/financeiro'); setDropdownOpen(false); }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                      Painel Financeiro
+                    </button>
+
+
+                  )}
 
                   <button
                     onClick={handleLogout}
