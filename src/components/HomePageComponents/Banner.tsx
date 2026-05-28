@@ -1,5 +1,6 @@
 import { useAuth } from "@/contexts/Context";
 import { useNavigate } from "react-router-dom";
+import bannerimg from "../../assets/BannerImg1.jpeg";
 
 export default function Banner() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function Banner() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1592818868295-f527dbac420d?q=80&w=1170&auto=format&fit=crop')`,
+          backgroundImage: `url(${bannerimg})`,
         }}
       >
         {/* Warm dark overlay — substitui o genérico preto/roxo */}

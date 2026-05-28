@@ -35,6 +35,8 @@ export function SubscriptionCard({ subscription }: Props) {
         )}
         {healthData.restricaoMedica && (
           <p><span className="font-medium">Restrição Médica:</span> {healthData.restricaoMedica}</p>
+        )}{healthData.cuidadosEspeciais && (
+          <p><span className="font-medium">Cuidados Especiais:</span> {healthData.cuidadosEspeciais}</p>
         )}
       </div>
 

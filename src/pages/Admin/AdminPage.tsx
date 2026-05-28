@@ -3,7 +3,6 @@ import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
 import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
 import type { Subscription } from "../../../types/subscription";
-import { useNavigate } from "react-router-dom";
 import { config } from "@/config/env";
 
 interface ApiResponse {
@@ -50,7 +49,6 @@ function PaymentBadge({ status }: { status: string }) {
 }
 
 export default function AdminPage() {
-  const navigate = useNavigate();
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -130,12 +128,6 @@ export default function AdminPage() {
               <p className="text-[#8C7355] text-sm font-sans mt-1">
                 {subscriptions.length} inscrição{subscriptions.length !== 1 ? "s" : ""} no total
               </p>
-              <button
-                onClick={() => navigate("/admin/financeiro")}
-                className="px-4 py-2 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors"
-              >
-                Financeiro
-              </button>
             </div>
 
             {/* Search */}
@@ -215,7 +207,7 @@ export default function AdminPage() {
                     <td className="px-3 py-3">
                       <button
                         onClick={() => getSubscription(sub._id)}
-                        className="px-2.5 py-1.5 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors duration-200 whitespace-nowrap"
+                        className=" cursor-pointer px-2.5 py-1.5 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors duration-200 whitespace-nowrap"
                       >
                         Ver mais
                       </button>

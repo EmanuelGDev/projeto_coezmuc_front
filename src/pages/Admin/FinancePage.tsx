@@ -118,7 +118,7 @@ function RecordModal({ module, types, initial, defaultType = "", onSave, onClose
           </div>
           <button
             onClick={onClose}
-            className={`mt-1 flex h-7 w-7 items-center justify-center rounded-lg text-sm ${T.btnOutline}`}
+            className={`cursor-pointer mt-1 flex h-7 w-7 items-center justify-center rounded-lg text-sm ${T.btnOutline}`}
           >
             ✕
           </button>
@@ -172,12 +172,12 @@ function RecordModal({ module, types, initial, defaultType = "", onSave, onClose
 
         {/* Ações */}
         <div className="flex justify-end gap-2 pt-1">
-          <button onClick={onClose} className={`rounded-lg px-4 py-2 text-xs font-sans tracking-wider uppercase ${T.btnOutline}`}>
+          <button onClick={onClose} className={`cursor-pointer rounded-lg px-4 py-2 text-xs font-sans tracking-wider uppercase ${T.btnOutline}`}>
             Cancelar
           </button>
           <button
             onClick={handleSubmit} disabled={saving}
-            className={`rounded-lg px-4 py-2 text-xs font-sans tracking-wider uppercase transition-colors disabled:opacity-60 ${acc.btnSave}`}
+            className={`cursor-pointer rounded-lg px-4 py-2 text-xs font-sans tracking-wider uppercase transition-colors disabled:opacity-60 ${acc.btnSave}`}
           >
             {saving ? "Salvando…" : "Salvar"}
           </button>
@@ -217,7 +217,7 @@ function DetailPanel({ module, typeName, records, types, onUpdate, onDelete, onC
         </div>
         <button
           onClick={() => setCreating(true)}
-          className={`px-3 py-1.5 rounded-lg text-xs font-sans tracking-wider uppercase ${T.btnDark}`}
+          className={`cursor-pointer px-3 py-1.5 rounded-lg text-xs font-sans tracking-wider uppercase ${T.btnDark}`}
         >
           + Novo
         </button>
@@ -256,7 +256,12 @@ function DetailPanel({ module, typeName, records, types, onUpdate, onDelete, onC
                 <button
                   title="Excluir"
                   onClick={async () => {
-                    if (confirm(`Excluir "${r.description}"?`)) await onDelete(r._id);
+                    if (!confirm(`Excluir "${r.description}"?`)) return;
+                    try {
+                      await onDelete(r._id);
+                    } catch (e: any) {
+                      alert(e.message ?? "Erro ao excluir registro.");
+                    }
                   }}
                   className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E8DDD0] text-[#991B1B] hover:bg-[#FDECEA] transition-colors"
                 >
@@ -328,7 +333,7 @@ function FinanceSection({ module }: { module: FinanceModule }) {
               key={g.type}
               onClick={() => setSelectedType(active ? null : g.type)}
               className={[
-                "rounded-xl border p-4 text-left transition-colors",
+                "cursor-pointer rounded-xl border p-4 text-left transition-colors",
                 active
                   ? acc.typeCardActive
                   : `border-[#E8DDD0] bg-white ${T.cardHover}`,
@@ -389,7 +394,7 @@ export default function FinancePage() {
               </div>
               <button
                 onClick={() => setCreatingGlobal(true)}
-                className={`px-4 py-2 text-xs font-sans tracking-wider uppercase rounded-lg ${T.btnDark}`}
+                className={`cursor-pointer px-4 py-2 text-xs font-sans tracking-wider uppercase rounded-lg ${T.btnDark}`}
               >
                 + Nova {label}
               </button>
@@ -406,7 +411,7 @@ export default function FinancePage() {
                   key={m}
                   onClick={() => setTab(m)}
                   className={[
-                    "rounded-lg px-5 py-2 text-xs font-sans tracking-wider uppercase transition-colors",
+                    "cursor-pointer rounded-lg px-5 py-2 text-xs font-sans tracking-wider uppercase transition-colors",
                     active ? tabAcc.tabActive : `border ${T.border} bg-white ${T.muted} ${T.cardHover}`,
                   ].join(" ")}
                 >
