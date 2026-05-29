@@ -54,7 +54,7 @@ export default function Banner() {
 
           <div className="flex items-center gap-2.5 text-[#C4B49A] text-base md:text-xl font-sans">
             <span className="w-1 h-1 rounded-full bg-[#B07D4A] inline-block" />
-            Escola Waldemar Rocha Neves, Teófilo Otoni
+            Escola Dr. Waldemar Neves da Rocha, Teófilo Otoni
           </div>
         </div>
 
