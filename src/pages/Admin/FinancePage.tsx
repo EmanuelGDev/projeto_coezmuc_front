@@ -306,7 +306,7 @@ function FinanceSection({ module }: { module: FinanceModule }) {
   return (
     <div>
       {/* Cards de métricas — idênticos ao stats row do AdminPage */}
-      <div className="mb-8 grid grid-cols-3 gap-4">
+      <div className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { label: "Total geral", value: fmt(grandTotal), cls: acc.valueText },
           { label: "Tipos", value: String(grouped.length), cls: "text-[#3D2C1E]" },
@@ -314,7 +314,7 @@ function FinanceSection({ module }: { module: FinanceModule }) {
         ].map(({ label, value, cls }) => (
           <div key={label} className={`rounded-xl p-4 ${T.card}`}>
             <p className={`text-xs font-sans tracking-widest uppercase mb-1 ${T.muted}`}>{label}</p>
-            <p className={`font-serif text-3xl ${cls}`}>{value}</p>
+            <p className={`font-serif text-2xl sm:text-3xl break-all ${cls}`}>{value}</p>
           </div>
         ))}
       </div>
