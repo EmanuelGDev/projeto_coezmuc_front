@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/Context";
 import type { HealthData, PaymentData, PersonalData, Subscription } from "../../../types/subscription";
 import { config } from "@/config/env"
@@ -106,6 +106,14 @@ export default function SubscriptionModal({ subscription, isOpen, onClose, onUpd
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  
+  useEffect(() => {
+  if (!isOpen) {
+    setForm(null);
+    setError(null);
+    setSuccess(false);
+  }
+}, [isOpen]);
 
   if (!isOpen || !subscription) return null;
 
