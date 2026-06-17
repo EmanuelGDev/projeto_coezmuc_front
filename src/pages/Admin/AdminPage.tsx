@@ -2,32 +2,33 @@ import Header from "@/components/Header";
 import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
 import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
+
 import type { Subscription } from "../../../types/subscription";
 import { config } from "@/config/env";
+import { useSubscriptionFilters } from "@/hooks/useSubscriptionsFilter";
+import FilterBar from "@/components/AdminComponents/FilterBar";
 
 interface ApiResponse {
   data: Subscription[];
 }
 
-
-
 const PAGE_SIZE = 15;
 
 const statusConfig = {
-  active: { label: "Ativo", bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]", dot: "bg-[#4CAF50]" },
-  pending: { label: "Pendente", bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]", dot: "bg-[#F59E0B]" },
+  active:    { label: "Ativo",     bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]", dot: "bg-[#4CAF50]" },
+  pending:   { label: "Pendente",  bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]", dot: "bg-[#F59E0B]" },
   cancelled: { label: "Cancelado", bg: "bg-[#FDECEA]", text: "text-[#991B1B]", dot: "bg-[#EF4444]" },
 };
 
 const paymentConfig = {
-  paid: { label: "Pago", bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]" },
-  partial: { label: "Parcial", bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]" },
+  paid:    { label: "Pago",     bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]" },
+  partial: { label: "Parcial",  bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]" },
   pending: { label: "Pendente", bg: "bg-[#FDECEA]", text: "text-[#991B1B]" },
 };
 
 function StatusBadge({ status }: { status: string }) {
   const cfg = statusConfig[status as keyof typeof statusConfig] ?? {
-    label: status, bg: "bg-[#F5EDE0]", text: "text-[#8C7355]", dot: "bg-[#B07D4A]"
+    label: status, bg: "bg-[#F5EDE0]", text: "text-[#8C7355]", dot: "bg-[#B07D4A]",
   };
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-sans font-medium ${cfg.bg} ${cfg.text}`}>
@@ -39,7 +40,7 @@ function StatusBadge({ status }: { status: string }) {
 
 function PaymentBadge({ status }: { status: string }) {
   const cfg = paymentConfig[status as keyof typeof paymentConfig] ?? {
-    label: status, bg: "bg-[#F5EDE0]", text: "text-[#8C7355]"
+    label: status, bg: "bg-[#F5EDE0]", text: "text-[#8C7355]",
   };
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-sans font-medium ${cfg.bg} ${cfg.text}`}>
@@ -54,8 +55,16 @@ export default function AdminPage() {
   const { user } = useAuth();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+
+  const {
+    filters,
+    updateFilter,
+    resetFilters,
+    isFiltered,
+    processed,
+    page,
+    setPage,
+  } = useSubscriptionFilters(subscriptions);
 
   async function fetchSubscriptions() {
     try {
@@ -86,19 +95,8 @@ export default function AdminPage() {
     }
   }
 
-  const filtered = subscriptions.filter((s) =>
-    [s.personalData.name, s.personalData.city, s.personalData.centroEspirita]
-      .join(" ").toLowerCase().includes(search.toLowerCase())
-  );
-
-  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-
-  // reset page on new search
-  function handleSearch(val: string) {
-    setSearch(val);
-    setPage(1);
-  }
+  const totalPages = Math.ceil(processed.length / PAGE_SIZE);
+  const paginated = processed.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   if (loading) {
     return (
@@ -129,29 +127,15 @@ export default function AdminPage() {
                 {subscriptions.length} inscrição{subscriptions.length !== 1 ? "s" : ""} no total
               </p>
             </div>
-
-            {/* Search */}
-            <div className="relative w-full sm:w-64">
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#B07D4A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
-              </svg>
-              <input
-                type="text"
-                placeholder="Buscar por nome, cidade..."
-                value={search}
-                onChange={(e) => handleSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 border border-[#E8DDD0] rounded-lg bg-white text-sm text-[#3D2C1E] font-sans placeholder:text-[#C4B49A] focus:outline-none focus:border-[#B07D4A] transition-colors"
-              />
-            </div>
           </div>
         </div>
 
         {/* Stats row */}
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total", value: subscriptions.length, color: "text-[#3D2C1E]" },
-            { label: "Ativos", value: subscriptions.filter(s => s.status.subscriptionStatus === "active").length, color: "text-[#2E7D32]" },
-            { label: "Pendentes", value: subscriptions.filter(s => s.status.subscriptionStatus === "pending").length, color: "text-[#8C6D1F]" },
+            { label: "Total",      value: subscriptions.length, color: "text-[#3D2C1E]" },
+            { label: "Ativos",     value: subscriptions.filter(s => s.status.subscriptionStatus === "active").length,    color: "text-[#2E7D32]" },
+            { label: "Pendentes",  value: subscriptions.filter(s => s.status.subscriptionStatus === "pending").length,   color: "text-[#8C6D1F]" },
             { label: "Cancelados", value: subscriptions.filter(s => s.status.subscriptionStatus === "cancelled").length, color: "text-[#991B1B]" },
           ].map(({ label, value, color }) => (
             <div key={label} className="bg-white border border-[#E8DDD0] rounded-xl p-4">
@@ -160,6 +144,16 @@ export default function AdminPage() {
             </div>
           ))}
         </div>
+
+        {/* Filter bar */}
+        <FilterBar
+          filters={filters}
+          onFilter={updateFilter}
+          onReset={resetFilters}
+          isFiltered={isFiltered}
+          totalResult={processed.length}
+          totalAll={subscriptions.length}
+        />
 
         {/* Desktop table */}
         <div className="max-w-7xl mx-auto hidden md:block">
@@ -207,7 +201,7 @@ export default function AdminPage() {
                     <td className="px-3 py-3">
                       <button
                         onClick={() => getSubscription(sub._id)}
-                        className=" cursor-pointer px-2.5 py-1.5 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors duration-200 whitespace-nowrap"
+                        className="cursor-pointer px-2.5 py-1.5 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors duration-200 whitespace-nowrap"
                       >
                         Ver mais
                       </button>
@@ -218,7 +212,9 @@ export default function AdminPage() {
                 {paginated.length === 0 && (
                   <tr>
                     <td colSpan={10} className="px-5 py-16 text-center text-[#8C7355] font-sans text-sm">
-                      Nenhuma inscrição encontrada.
+                      {isFiltered
+                        ? "Nenhuma inscrição encontrada para os filtros aplicados."
+                        : "Nenhuma inscrição encontrada."}
                     </td>
                   </tr>
                 )}
@@ -230,7 +226,7 @@ export default function AdminPage() {
           {totalPages > 1 && (
             <div className="flex items-center justify-between mt-4">
               <p className="text-xs text-[#8C7355] font-sans">
-                Mostrando {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, filtered.length)} de {filtered.length}
+                Mostrando {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, processed.length)} de {processed.length}
               </p>
               <div className="flex items-center gap-1">
                 <button
@@ -244,10 +240,11 @@ export default function AdminPage() {
                   <button
                     key={p}
                     onClick={() => setPage(p)}
-                    className={`w-8 h-8 text-xs font-sans rounded-lg border transition-colors ${p === page
+                    className={`w-8 h-8 text-xs font-sans rounded-lg border transition-colors ${
+                      p === page
                         ? "bg-[#3D2C1E] text-[#FAF7F2] border-[#3D2C1E]"
                         : "border-[#E8DDD0] text-[#8C7355] hover:bg-[#F0E6D3]"
-                      }`}
+                    }`}
                   >
                     {p}
                   </button>
@@ -303,7 +300,9 @@ export default function AdminPage() {
 
           {paginated.length === 0 && (
             <div className="text-center py-16 text-[#8C7355] font-sans text-sm">
-              Nenhuma inscrição encontrada.
+              {isFiltered
+                ? "Nenhuma inscrição encontrada para os filtros aplicados."
+                : "Nenhuma inscrição encontrada."}
             </div>
           )}
 
