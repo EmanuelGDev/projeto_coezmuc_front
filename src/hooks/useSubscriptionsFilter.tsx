@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import type { Subscription } from "../../../types/subscription";
+import type { Subscription } from "../../types/subscription";
+
 
 export type SortKey =
   | "name_asc"

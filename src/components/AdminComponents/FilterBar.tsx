@@ -1,4 +1,4 @@
-import type { FilterState, SortKey, StatusFilter, PaymentFilter } from "@/hooks/useSubscriptionFilters";
+import type { FilterState, PaymentFilter, SortKey, StatusFilter } from "@/hooks/useSubscriptionsFilter";
 
 interface FilterBarProps {
   filters: FilterState;
