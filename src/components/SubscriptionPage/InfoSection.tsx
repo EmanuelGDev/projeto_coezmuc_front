@@ -39,7 +39,7 @@ export function InfoSection() {
                         <ul className="space-y-2">
                             {[
                                 "Pagamento à vista ou parcelado via PIX, ou por transferência bancária.",
-                                "A quantidade de parcelas é condicionada à data de inscrição — a última parcela não poderá ultrapassar 20/01/2026.",
+                                "A quantidade de parcelas é condicionada à data de inscrição — a última parcela não poderá ultrapassar 20/01/2027.",
                                 "Favor informar o nome do responsável no campo \"Observações\" do PIX.",
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-2.5 text-sm text-[#5A4030] font-sans leading-relaxed">
@@ -105,10 +105,10 @@ export function InfoSection() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="rounded-xl border border-[#E8DDD0] p-5 space-y-1.5">
                             <p className="text-xs font-sans font-medium text-[#8C7355] uppercase tracking-widest">Prazo para Inscrição</p>
-                            <p className="text-base text-[#3D2C1E] font-sans font-medium">20/06/2025 – 20/12/2025</p>
+                            <p className="text-base text-[#3D2C1E] font-sans font-medium">20/06/2026 – 20/12/2027</p>
                             <p className="text-sm text-[#A08060] font-sans">Vagas limitadas.</p>
                             <div className="pt-1 border-t border-[#F0E8DE]">
-                                <p className="text-sm text-[#B07D4A] font-sans font-medium">Lista de espera até 20/01/2026</p>
+                                <p className="text-sm text-[#B07D4A] font-sans font-medium">Lista de espera até 20/01/2027</p>
                             </div>
                         </div>
                         <div className="rounded-xl border border-[#E8DDD0] p-5 space-y-1.5">
