@@ -39,7 +39,7 @@ export function ConsentSection({ imageConsent, regulationsConsent, onChange }: P
                 <p className="text-base text-[#6B5240] font-sans">
                     Acesse o{" "}
                     <a
-                        href="https://drive.google.com/file/d/17nxvRTpklBFdhWaLdsEOYKK_5svuf0l_/view?usp=sharing"
+                        href="https://drive.google.com/file/d/1xIe_aqpzazRa_3gZ0IIUQvrE98YHjLrK/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[#B07D4A] underline underline-offset-2 hover:text-[#8A5E30] transition-colors"

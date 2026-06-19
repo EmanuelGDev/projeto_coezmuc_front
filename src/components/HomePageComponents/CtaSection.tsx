@@ -80,7 +80,7 @@ export default function CtaSection() {
           <p className="text-[#8C7355] text-lg font-sans mb-3 leading-relaxed">
             Acesse o{" "}
             <a
-              href="https://drive.google.com/file/d/17nxvRTpklBFdhWaLdsEOYKK_5svuf0l_/view?usp=sharing"
+              href="https://drive.google.com/file/d/1xIe_aqpzazRa_3gZ0IIUQvrE98YHjLrK/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#D4A96A] underline underline-offset-2 hover:text-[#FAF7F2] transition-colors"

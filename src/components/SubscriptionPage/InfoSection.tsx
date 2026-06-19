@@ -8,9 +8,9 @@ const bankDetails = [
 ];
 
 const prices = [
-    { range: "3 a 5 anos", value: "R$ 150,00" },
-    { range: "6 a 10 anos", value: "R$ 200,00" },
-    { range: "Acima de 11 anos", value: "R$ 400,00" },
+    { range: "3 a 5 anos", value: "R$ 160,00" },
+    { range: "6 a 10 anos", value: "R$ 215,00" },
+    { range: "Acima de 11 anos", value: "R$ 430,00" },
 ];
 
 export function InfoSection() {
