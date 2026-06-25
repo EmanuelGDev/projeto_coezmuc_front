@@ -113,7 +113,7 @@ export function InfoSection() {
                         </div>
                         <div className="rounded-xl border border-[#E8DDD0] p-5 space-y-1.5">
                             <p className="text-xs font-sans font-medium text-[#8C7355] uppercase tracking-widest">Prazo para Pagamento</p>
-                            <p className="text-base text-[#3D2C1E] font-sans font-medium">À vista até 20/01/2026</p>
+                            <p className="text-base text-[#3D2C1E] font-sans font-medium">À vista até 20/01/2027</p>
                             <p className="text-sm text-[#A08060] font-sans">Inscrição confirmada somente após o pagamento.</p>
                             <div className="pt-1 border-t border-[#F0E8DE]">
                                 <p className="text-sm text-[#B07D4A] font-sans font-medium">Parcelado: última parcela até 20/01/2027</p>
