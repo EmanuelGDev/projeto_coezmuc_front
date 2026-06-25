@@ -22,7 +22,7 @@ const DIETARY_OPTIONS = [
 const REGIME_OPTIONS = [
     "Não",
     "Saúde (física ou mental) própria ou de familiar e/ou dependente",
-    "Limitações físicas (idade avançada)",
+    "Limitações físicas (pessoa idosa)",
     "Assistência a familiar e/ou dependente",
     "Trabalho em turnos, plantão ou escala",
     "Outro: Informar à Coordenação Geral",
