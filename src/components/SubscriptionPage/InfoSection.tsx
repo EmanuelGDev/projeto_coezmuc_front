@@ -1,10 +1,5 @@
 const bankDetails = [
-    { label: "Beneficiário", value: "Aliança Municipal Espírita de Teófilo Otoni" },
-    { label: "Banco", value: "AC Crédito (756)" },
-    { label: "Cooperativa", value: "4071-1" },
-    { label: "Conta", value: "25.692.001-0" },
-    { label: "CNPJ", value: "21.084.157/0001-12" },
-    { label: "PIX", value: "21084157000112" },
+    { label: "Chave PIX", value: "coezmuc123@gmail.com" },
 ];
 
 const prices = [
@@ -38,7 +33,7 @@ export function InfoSection() {
                         <p className="text-sm font-sans font-medium text-[#8C7355] uppercase tracking-widest">Formas de Pagamento</p>
                         <ul className="space-y-2">
                             {[
-                                "Pagamento à vista ou parcelado via PIX, ou por transferência bancária.",
+                                "Pagamento à vista ou parcelado via PIX.",
                                 "A quantidade de parcelas é condicionada à data de inscrição — a última parcela não poderá ultrapassar 20/01/2027.",
                                 "Favor informar o nome do responsável no campo \"Observações\" do PIX.",
                             ].map((item, i) => (
