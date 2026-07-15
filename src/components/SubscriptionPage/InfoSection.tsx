@@ -1,4 +1,6 @@
 const bankDetails = [
+    { label: "Beneficiário", value: "Aliança Municipal Espírita de Teófilo Otoni" },
+    { label: "Banco", value: "AC Crédito (756)" },
     { label: "Chave PIX", value: "coezmuc123@gmail.com" },
 ];
 
@@ -35,7 +37,7 @@ export function InfoSection() {
                             {[
                                 "Pagamento à vista ou parcelado via PIX.",
                                 "A quantidade de parcelas é condicionada à data de inscrição — a última parcela não poderá ultrapassar 20/01/2027.",
-                                "Favor informar o nome do responsável no campo \"Observações\" do PIX.",
+                                "Mensagem de identificação do PIX: \"Primeira Parcela: [Nome Completo]\" Após o pagamento, guarde o comprovante.",
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-2.5 text-sm text-[#5A4030] font-sans leading-relaxed">
                                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#B07D4A] shrink-0" />
