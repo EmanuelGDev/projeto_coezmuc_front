@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import { useAuth } from "@/contexts/Context";
 import { useEffect, useState } from "react";
 import SubscriptionModal from "@/components/AdminComponents/SubscriptionModal";
 
@@ -52,7 +51,6 @@ function PaymentBadge({ status }: { status: string }) {
 export default function AdminPage() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-
-import { useAuth } from '@/contexts/Context'
 import type { Subscription, UserSubscriptionsResponse } from '../../types/subscription'
 import { config } from '@/config/env'
 
@@ -8,7 +6,6 @@ export function useUserSubscriptions(userId: string) {
   const [data, setData] = useState<Subscription[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
-
 
   useEffect(() => {
     if (!userId) return
