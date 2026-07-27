@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@/contexts/Context";
 import type { HealthData, PaymentData, PersonalData, Subscription } from "../../../types/subscription";
 import { config } from "@/config/env"
 
@@ -31,7 +30,7 @@ function InlineField({
   if (!editing) {
     return (
       <div className="flex items-start gap-3 py-2 border-b border-[#F0E6D3] last:border-0">
-        <span className="text-[#8C7355] text-xs font-sans tracking-wide uppercase min-w-[140px] pt-0.5 shrink-0">
+        <span className="text-[#8C7355] text-xs font-sans tracking-wide uppercase min-w-35 pt-0.5 shrink-0">
           {label}
         </span>
         <span
@@ -49,7 +48,7 @@ function InlineField({
 
   return (
     <div className="flex items-start gap-3 py-2 border-b border-[#F0E6D3] last:border-0">
-      <span className="text-[#8C7355] text-xs font-sans tracking-wide uppercase min-w-[140px] pt-1.5 shrink-0">
+      <span className="text-[#8C7355] text-xs font-sans tracking-wide uppercase min-w-35 pt-1.5 shrink-0">
         {label}
       </span>
       {type === "select" && options ? (
@@ -101,7 +100,6 @@ function SectionHeader({ title }: { title: string }) {
 }
 
 export default function SubscriptionModal({ subscription, isOpen, onClose, onUpdated }: Props) {
-  const { user } = useAuth();
   const [form, setForm] = useState<Subscription | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -178,8 +176,8 @@ export default function SubscriptionModal({ subscription, isOpen, onClose, onUpd
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
         },
+        credentials: "include", // manda o cookie httpOnly em vez do header Authorization
         body: JSON.stringify({
           personalData: payload.personalData,
           healthData: payload.healthData,

@@ -8,7 +8,7 @@ export function PrivateTokenRoute({ children }: any) {
     if(isLoading){
       return <div>Carregando</div>
     }
-  if (!user?.token) {
+  if (!user) {
     return <Navigate to="/auth/login" replace />;
   }
 

@@ -51,7 +51,7 @@ export default function FilterBar({
         <div className="flex flex-wrap items-end gap-3">
 
           {/* Busca */}
-          <div className="flex-1 min-w-[200px]">
+          <div className="flex-1 min-w-50">
             <label className="block text-[10px] font-sans tracking-widest uppercase text-[#8C7355] mb-1.5">
               Buscar
             </label>
@@ -85,7 +85,7 @@ export default function FilterBar({
           </div>
 
           {/* Ordenar */}
-          <div className="min-w-[180px]">
+          <div className="min-w-45">
             <label className="block text-[10px] font-sans tracking-widest uppercase text-[#8C7355] mb-1.5">
               Ordenar por
             </label>
@@ -107,7 +107,7 @@ export default function FilterBar({
           </div>
 
           {/* Status */}
-          <div className="min-w-[180px]">
+          <div className="min-w-45">
             <label className="block text-[10px] font-sans tracking-widest uppercase text-[#8C7355] mb-1.5">
               Status
             </label>
@@ -129,7 +129,7 @@ export default function FilterBar({
           </div>
 
           {/* Pagamento */}
-          <div className="min-w-[180px]">
+          <div className="min-w-45">
             <label className="block text-[10px] font-sans tracking-widest uppercase text-[#8C7355] mb-1.5">
               Pagamento
             </label>

@@ -8,7 +8,7 @@ export function useUserSubscriptions(userId: string) {
   const [data, setData] = useState<Subscription[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
-  const { user } = useAuth()
+
 
   useEffect(() => {
     if (!userId) return
@@ -20,8 +20,8 @@ export function useUserSubscriptions(userId: string) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user?.token}`
-      }
+      },
+      credentials: 'include',
     })
       .then((res) => {
         if (!res.ok) throw new Error('Erro ao buscar inscrições')

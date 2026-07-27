@@ -66,10 +66,10 @@ export default function AdminPage() {
     setPage,
   } = useSubscriptionFilters(subscriptions);
 
-  async function fetchSubscriptions() {
+    async function fetchSubscriptions() {
     try {
       const response = await fetch(`${config.apiUrl}/subscription`, {
-        headers: { Authorization: `Bearer ${user?.token}` },
+        credentials: "include",
       });
       const result: ApiResponse = await response.json();
       setSubscriptions(result.data);
@@ -85,7 +85,7 @@ export default function AdminPage() {
   async function getSubscription(id: string) {
     try {
       const response = await fetch(`${config.apiUrl}/subscription/${id}`, {
-        headers: { Authorization: `Bearer ${user?.token}` },
+        credentials: "include",
       });
       const result = await response.json();
       setSubscription(result.data);

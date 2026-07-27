@@ -24,10 +24,9 @@ export type TypeSummary = {
 
 const BASE_URL = import.meta.env.VITE_API_KEY ?? "http://localhost:3333";
 
-function authHeaders(token: string, withBody = true): HeadersInit {
+function jsonHeaders(withBody = true): HeadersInit {
   return {
     ...(withBody && { "Content-Type": "application/json" }),
-    Authorization: `Bearer ${token}`,
   };
 }
 
@@ -57,13 +56,14 @@ export function useFinance(module: FinanceModule) {
   const [error, setError] = useState<string | null>(null);
 
   const fetchRecords = useCallback(async () => {
-    if (!user?.token) return;
+    if (!user) return;
 
     setLoading(true);
     setError(null);
     try {
       const res = await fetch(`${BASE_URL}/${module}`, {
-        headers: authHeaders(user.token, false),
+        headers: jsonHeaders(false),
+        credentials: "include",
       });
       if (!res.ok) throw new Error(await res.text());
       const data: FinanceRecord[] = await res.json();
@@ -73,13 +73,14 @@ export function useFinance(module: FinanceModule) {
     } finally {
       setLoading(false);
     }
-  }, [module, user?.token]);
+  }, [module, user]);
 
   const fetchTypes = useCallback(async () => {
-    if (!user?.token) return;
+    if (!user) return;
     try {
       const res = await fetch(`${BASE_URL}/${module}/types`, {
-        headers: authHeaders(user.token, false),
+        headers: jsonHeaders(false),
+        credentials: "include",
       });
       if (!res.ok) throw new Error(await res.text());
       const data: string[] = await res.json();
@@ -87,14 +88,15 @@ export function useFinance(module: FinanceModule) {
     } catch {
       // Não bloqueia a UI
     }
-  }, [module, user?.token]);
+  }, [module, user]);
 
   const fetchSubscriptionRevenue = useCallback(async () => {
-    if (module !== "revenue" || !user?.token) return;
+    if (module !== "revenue" || !user) return;
 
     try {
       const res = await fetch(`${BASE_URL}/subscription/revenue-summary`, {
-        headers: authHeaders(user.token, false),
+        headers: jsonHeaders(false),
+        credentials: "include",
       });
       if (!res.ok) return;
 
@@ -119,7 +121,7 @@ export function useFinance(module: FinanceModule) {
     } catch {
       // Falha silenciosa
     }
-  }, [module, user?.token]);
+  }, [module, user]);
 
   useEffect(() => {
     Promise.all([fetchRecords(), fetchTypes()]).then(() => {
@@ -129,11 +131,12 @@ export function useFinance(module: FinanceModule) {
 
   const create = useCallback(
     async (data: Omit<FinanceRecord, "_id">) => {
-      if (!user?.token) throw new Error("Não autenticado");
+      if (!user) throw new Error("Não autenticado");
 
       const res = await fetch(`${BASE_URL}/${module}/create`, {
         method: "POST",
-        headers: authHeaders(user.token),
+        headers: jsonHeaders(),
+        credentials: "include",
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -141,16 +144,17 @@ export function useFinance(module: FinanceModule) {
       const created: FinanceRecord = json.data ?? json; // unwrap { data }
       setRecords((prev) => [...prev, created]);
     },
-    [module, user?.token]
+    [module, user]
   );
 
   const update = useCallback(
     async (id: string, data: Partial<Omit<FinanceRecord, "_id">>) => {
-      if (!user?.token) throw new Error("Não autenticado");
+      if (!user) throw new Error("Não autenticado");
 
       const res = await fetch(`${BASE_URL}/${module}/update/${id}`, {
         method: "PUT",
-        headers: authHeaders(user.token),
+        headers: jsonHeaders(),
+        credentials: "include",
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -158,21 +162,22 @@ export function useFinance(module: FinanceModule) {
       const updated: FinanceRecord = json.data ?? json; // unwrap { data }
       setRecords((prev) => prev.map((r) => (r._id === id ? updated : r)));
     },
-    [module, user?.token]
+    [module, user]
   );
 
   const remove = useCallback(
     async (id: string) => {
-      if (!user?.token) throw new Error("Não autenticado");
+      if (!user) throw new Error("Não autenticado");
 
       const res = await fetch(`${BASE_URL}/${module}/delete/${id}`, {
         method: "DELETE",
-        headers: authHeaders(user.token, false), // sem Content-Type
+        headers: jsonHeaders(false), // sem Content-Type
+        credentials: "include",
       });
       if (!res.ok) throw new Error(await res.text());
       setRecords((prev) => prev.filter((r) => r._id !== id));
     },
-    [module, user?.token]
+    [module, user]
   );
 
   const grouped = groupByType(records);

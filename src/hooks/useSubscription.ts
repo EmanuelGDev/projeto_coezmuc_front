@@ -47,7 +47,7 @@ export function useSubscription() {
         setHealthData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = async () => {
+     const handleSubmit = async () => {
         if (!user?.id) {
             alert("Usuário não autenticado");
             return;
@@ -56,9 +56,8 @@ export function useSubscription() {
         try {
             const response = await fetch(`${config.apiUrl}/subscription/create`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${user?.token}`
-                 },
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ userId: user.id, personalData, healthData }),
             });
 
