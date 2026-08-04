@@ -30,7 +30,7 @@ export default function Register() {
       toast.success("Registro realizado com sucesso!");
       navigate("/auth/login");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Erro ao criar conta. Tente novamente.");
+      toast.error(error instanceof Error ? error.message : "Erro ao criar conta. Tente novamente.", {duration: 10000});
     } finally {
       setIsLoading(false);
     }
