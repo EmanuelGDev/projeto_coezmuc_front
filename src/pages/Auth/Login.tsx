@@ -13,18 +13,21 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      await login(email, password);
-      toast.success("Login realizado com sucesso!");
-      navigate("/");
-    } catch {
-      toast.error("Credenciais inválidas. Tente novamente.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  e.preventDefault();
+  setIsLoading(true);
+  try {
+    await login(email, password);
+    toast.success("Login realizado com sucesso!");
+    navigate("/");
+  } catch (error) {
+    const message = error instanceof Error 
+      ? error.message 
+      : "Credenciais inválidas. Tente novamente.";
+    toast.error(message);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleEmailKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {

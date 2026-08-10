@@ -34,15 +34,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const response = await fetch(`${config.apiUrl}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // essencial: sem isso o navegador ignora o Set-Cookie
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     });
 
+    const result = await response.json().catch(() => null);
+
     if (!response.ok) {
-      throw new Error('Login failed');
+      throw new Error(result?.message || 'Não foi possível fazer login. Tente novamente.');
     }
 
-    const result = await response.json();
     setUser(result.data);
     return result.data;
   };
