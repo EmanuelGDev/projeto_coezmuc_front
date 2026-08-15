@@ -13,21 +13,21 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-  try {
-    await login(email, password);
-    toast.success("Login realizado com sucesso!");
-    navigate("/");
-  } catch (error) {
-    const message = error instanceof Error 
-      ? error.message 
-      : "Credenciais inválidas. Tente novamente.";
-    toast.error(message);
-  } finally {
-    setIsLoading(false);
-  }
-};
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await login(email, password);
+      toast.success("Login realizado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      const message = error instanceof Error
+        ? error.message
+        : "Credenciais inválidas. Tente novamente.";
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleEmailKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -61,7 +61,7 @@ export default function Login() {
 
         {/* Logo / título */}
         <div className="text-center mb-8">
-          
+
           <p className="text-xs font-sans tracking-[0.2em] uppercase text-[#D4A96A]">
             Área do Participante
           </p>
@@ -130,6 +130,16 @@ export default function Login() {
                     {showPassword ? "Ocultar" : "Mostrar"}
                   </button>
                 </div>
+              </div>
+
+              <div className="flex justify-end -mt-2">
+                <button
+                  type="button"
+                  onClick={() => navigate("/auth/forgot-password")}
+                  className="text-xs font-sans text-[#B07D4A] hover:text-[#8A5E30] hover:underline transition-colors"
+                >
+                  Esqueci minha senha
+                </button>
               </div>
 
               <div className="pt-2">

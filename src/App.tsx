@@ -10,6 +10,8 @@ import { PrivateAdminRoute } from "./contexts/PrivateAdminRoute"
 import AdminPage from "./pages/Admin/AdminPage"
 import FinancePage from "./pages/Admin/FinancePage"
 import MySubscriptionsPage from "./pages/MySubscriptions/MySubscriptionsPage"
+import ForgotPassword from "./pages/Auth/ForgotPassword"
+import ResetPassword from "./pages/Auth/ResetPassword"
 
 
 
@@ -30,6 +32,8 @@ function App() {
           <Route path="/subscription/*" element={<PrivateTokenRoute><SubscriptionPage /></PrivateTokenRoute>} />
           <Route path="/my-subscriptions" element={<PrivateTokenRoute><MySubscriptionsPage /></PrivateTokenRoute>} />
           <Route path="*" element={<h1>404 - Not Found</h1>} />
+          <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+          <Route path="/auth/reset-password" element={<ResetPassword />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
