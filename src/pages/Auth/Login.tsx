@@ -136,7 +136,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => navigate("/auth/forgot-password")}
-                  className="text-xs font-sans text-[#B07D4A] hover:text-[#8A5E30] hover:underline transition-colors"
+                  className="text-xs font-sans text-[#B07D4A] hover:text-[#8A5E30] hover:underline transition-colors cursor-pointer"
                 >
                   Esqueci minha senha
                 </button>
