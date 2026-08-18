@@ -53,6 +53,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   const {
     filters,
@@ -93,6 +94,32 @@ export default function AdminPage() {
     }
   }
 
+  async function handleExportCsv() {
+    setExporting(true);
+    try {
+      const response = await fetch(`${config.apiUrl}/subscription/export`, {
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        console.error("Erro ao exportar CSV:", response.status);
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `inscricoes-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Erro ao exportar CSV:", error);
+    } finally {
+      setExporting(false);
+    }
+  }
+
   const totalPages = Math.ceil(processed.length / PAGE_SIZE);
   const paginated = processed.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
@@ -125,6 +152,13 @@ export default function AdminPage() {
                 {subscriptions.length} inscrição{subscriptions.length !== 1 ? "s" : ""} no total
               </p>
             </div>
+            <button
+              onClick={handleExportCsv}
+              disabled={exporting || subscriptions.length === 0}
+              className="cursor-pointer px-4 py-2 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+            >
+              {exporting ? "Exportando..." : "Exportar para planilha"}
+            </button>
           </div>
         </div>
 
