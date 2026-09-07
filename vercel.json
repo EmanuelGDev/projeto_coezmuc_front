@@ -1,6 +1,15 @@
 {
-  "routes": [
-    { "src": "/api/(.*)", "dest": "https://api-coezmuc.vercel.app/$1" },
-    { "src": "/[^.]+", "dest": "/", "status": 200 }
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "has": [{ "type": "host", "value": "coezmuc.vercel.app" }],
+      "destination": "https://api-coezmuc.vercel.app/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "has": [{ "type": "host", "value": "coezmuc-staging.vercel.app" }],
+      "destination": "https://api-coezmuc-staging.vercel.app/:path*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
