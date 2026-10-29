@@ -14,14 +14,14 @@ interface ApiResponse {
 const PAGE_SIZE = 15;
 
 const statusConfig = {
-  active:    { label: "Ativo",     bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]", dot: "bg-[#4CAF50]" },
-  pending:   { label: "Pendente",  bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]", dot: "bg-[#F59E0B]" },
+  active: { label: "Ativo", bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]", dot: "bg-[#4CAF50]" },
+  pending: { label: "Pendente", bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]", dot: "bg-[#F59E0B]" },
   cancelled: { label: "Cancelado", bg: "bg-[#FDECEA]", text: "text-[#991B1B]", dot: "bg-[#EF4444]" },
 };
 
 const paymentConfig = {
-  paid:    { label: "Pago",     bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]" },
-  partial: { label: "Parcial",  bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]" },
+  paid: { label: "Pago", bg: "bg-[#E8F5E9]", text: "text-[#2E7D32]" },
+  partial: { label: "Parcial", bg: "bg-[#FFF8E1]", text: "text-[#8C6D1F]" },
   pending: { label: "Pendente", bg: "bg-[#FDECEA]", text: "text-[#991B1B]" },
 };
 
@@ -65,7 +65,7 @@ export default function AdminPage() {
     setPage,
   } = useSubscriptionFilters(subscriptions);
 
-    async function fetchSubscriptions() {
+  async function fetchSubscriptions() {
     try {
       const response = await fetch(`${config.apiUrl}/subscription`, {
         credentials: "include",
@@ -94,7 +94,7 @@ export default function AdminPage() {
     }
   }
 
-  async function handleExportCsv() {
+  async function handleExportXlsx() {
     setExporting(true);
     try {
       const response = await fetch(`${config.apiUrl}/subscription/export`, {
@@ -102,7 +102,7 @@ export default function AdminPage() {
       });
 
       if (!response.ok) {
-        console.error("Erro ao exportar CSV:", response.status);
+        console.error("Erro ao exportar planilha:", response.status);
         return;
       }
 
@@ -110,11 +110,11 @@ export default function AdminPage() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `inscricoes-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `inscricoes-${new Date().toISOString().slice(0, 10)}.xlsx`;
       a.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Erro ao exportar CSV:", error);
+      console.error("Erro ao exportar planilha:", error);
     } finally {
       setExporting(false);
     }
@@ -153,7 +153,7 @@ export default function AdminPage() {
               </p>
             </div>
             <button
-              onClick={handleExportCsv}
+              onClick={handleExportXlsx}
               disabled={exporting || subscriptions.length === 0}
               className="cursor-pointer px-4 py-2 bg-[#3D2C1E] text-[#FAF7F2] text-xs font-sans tracking-wider uppercase rounded-lg hover:bg-[#B07D4A] transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
             >
@@ -165,9 +165,9 @@ export default function AdminPage() {
         {/* Stats row */}
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total",      value: subscriptions.length, color: "text-[#3D2C1E]" },
-            { label: "Ativos",     value: subscriptions.filter(s => s.status.subscriptionStatus === "active").length,    color: "text-[#2E7D32]" },
-            { label: "Pendentes",  value: subscriptions.filter(s => s.status.subscriptionStatus === "pending").length,   color: "text-[#8C6D1F]" },
+            { label: "Total", value: subscriptions.length, color: "text-[#3D2C1E]" },
+            { label: "Ativos", value: subscriptions.filter(s => s.status.subscriptionStatus === "active").length, color: "text-[#2E7D32]" },
+            { label: "Pendentes", value: subscriptions.filter(s => s.status.subscriptionStatus === "pending").length, color: "text-[#8C6D1F]" },
             { label: "Cancelados", value: subscriptions.filter(s => s.status.subscriptionStatus === "cancelled").length, color: "text-[#991B1B]" },
           ].map(({ label, value, color }) => (
             <div key={label} className="bg-white border border-[#E8DDD0] rounded-xl p-4">
@@ -272,11 +272,10 @@ export default function AdminPage() {
                   <button
                     key={p}
                     onClick={() => setPage(p)}
-                    className={`w-8 h-8 text-xs font-sans rounded-lg border transition-colors ${
-                      p === page
+                    className={`w-8 h-8 text-xs font-sans rounded-lg border transition-colors ${p === page
                         ? "bg-[#3D2C1E] text-[#FAF7F2] border-[#3D2C1E]"
                         : "border-[#E8DDD0] text-[#8C7355] hover:bg-[#F0E6D3]"
-                    }`}
+                      }`}
                   >
                     {p}
                   </button>
